@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
  
 def index(request):
-    return HttpResponse(u"欢迎光临 自强学堂!")
+    return HttpResponse(u"welcome !")
 	
 def add(request):
     a = request.GET['a']
@@ -23,5 +23,5 @@ def home(request):
     return render(request, 'base_ex.html')
 
 def json(request):
-    List = ['自强学堂', '渲染Json到模板']
+    List = ['kct', 'render to template']
     return render(request, 'json.html', {'List': List})

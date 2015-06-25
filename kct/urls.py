@@ -6,7 +6,7 @@ urlpatterns = [
     # url(r'^$', 'kct.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)), # admin目录下site.py的urls函数
+    url(r'^admin/', include(admin.site.urls)), # admin目录下site.py的urls函数  http://127.0.0.1:8000/admin   admin:admin
 	
 	url(r'^$', 'autonumber.views.index', name='index'), # http://127.0.0.1:8000/
 	url(r'^add/$', 'autonumber.views.add', name='add'), # http://127.0.0.1:8000/add/?a=4&b=5
