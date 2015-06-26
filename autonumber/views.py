@@ -25,3 +25,9 @@ def home(request):
 def json(request):
     List = ['kct', 'render to template']
     return render(request, 'json.html', {'List': List})
+
+def form_get(request):
+    return render(request, 'form_get.html')
+
+
+

@@ -14,4 +14,5 @@ urlpatterns = [
 	url(r'^link/$', 'autonumber.views.link', name='link'), # http://127.0.0.1:8000/link
 	url(r'^home/$', 'autonumber.views.home', name='home'), # http://127.0.0.1:8000/home
 	url(r'^json/$', 'autonumber.views.json', name='json'), # http://127.0.0.1:8000/json
+	url(r'^form_get/$', 'autonumber.views.form_get', name='form_get'), # http://127.0.0.1:8000/form_get
 ]
