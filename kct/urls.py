@@ -1,6 +1,5 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     # Examples:
@@ -19,4 +18,3 @@ urlpatterns = [
 	url(r'^form1/$', 'autonumber.views.form1', name='form1'), # http://127.0.0.1:8000/form1
 	
 ]
-urlpatterns += staticfiles_urlpatterns()
