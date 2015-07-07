@@ -51,3 +51,7 @@ def form1(request):
 
 def test(request):
     return render(request, 'test.html')
+
+
+def 11(request):
+    return render(request, '11.html')
