@@ -108,6 +108,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
     ("css", os.path.join(STATIC_ROOT,'bootstrap/css')),
     ("js", os.path.join(STATIC_ROOT,'bootstrap/js')),
-    ("images", os.path.join(STATIC_ROOT,'bootstrap/img')),
+    ("fonts", os.path.join(STATIC_ROOT,'bootstrap/fonts')),
+    ("images", os.path.join(STATIC_ROOT,'images')),
     STATIC_URL
 )

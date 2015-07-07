@@ -16,5 +16,5 @@ urlpatterns = [
 	url(r'^json/$', 'autonumber.views.json', name='json'), # http://127.0.0.1:8000/json
 	url(r'^form_get/$', 'autonumber.views.form_get', name='form_get'), # http://127.0.0.1:8000/form_get
 	url(r'^form1/$', 'autonumber.views.form1', name='form1'), # http://127.0.0.1:8000/form1
-	
+	url(r'^test/$', 'autonumber.views.test', name='test'), # http://127.0.0.1:8000/test
 ]

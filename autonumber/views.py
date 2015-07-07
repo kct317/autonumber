@@ -49,4 +49,5 @@ def form1(request):
     return render(request, 'form1.html', {'form': form})
 
 
-
+def test(request):
+    return render(request, 'test.html')
