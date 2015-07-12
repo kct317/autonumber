@@ -53,5 +53,17 @@ def test(request):
     return render(request, 'test.html')
 
 
-def 11(request):
+def elenve(request):
     return render(request, '11.html')
+
+def view1(request, num):
+    return render(request, 'foo.html', {'num': int(num)})
+
+def view2(request, num):
+    return render(request, 'foo.html', {'num': int(num)**2})
+
+def foo(request, func, Month, Day):
+    def footest(request):
+        num = int(Month) + int(Day)
+        return func(request, num)
+    return footest(request)
