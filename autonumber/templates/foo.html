@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+
 <html>
+	{% load staticfiles %} <!-- bootstrap -->
+	{% load extra_tags %}  <!-- 过滤器和标签 -->
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,5 +20,11 @@
 </head>
 <body>
 	{{ num }}
+	{{ key | cut:"o"}}
+	{% current_time "%Y-%m-%d %H:%M:%S" %}
+
+	{% for b in object_list %}
+			{{ b.title }}
+		{% endfor %}
 </body>
 </html>

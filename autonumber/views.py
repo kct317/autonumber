@@ -2,6 +2,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms
+from autonumber.models import * 
+from  django.views.generic.list import ListView
+
 
 def index(request):
     return HttpResponse(u"welcome !")
@@ -48,22 +51,32 @@ def form1(request):
         form = AddForm()
     return render(request, 'form1.html', {'form': form})
 
-
 def test(request):
     return render(request, 'test.html')
-
 
 def elenve(request):
     return render(request, '11.html')
 
 def view1(request, num):
-    return render(request, 'foo.html', {'num': int(num)})
+    return render(request, 'foo.html', {'num': int(num), 'key':"hello"})
 
 def view2(request, num):
-    return render(request, 'foo.html', {'num': int(num)**2})
+    return render(request, 'foo.html', {'num': int(num)**2, 'key':"hello"})
 
 def foo(request, func, Month, Day):
     def footest(request):
         num = int(Month) + int(Day)
         return func(request, num)
     return footest(request)
+
+
+class ArticleListView(ListView):
+    model = Article
+    #queryset = Article.objects.filter(content_icontains="aaa")
+    queryset = Article.objects.all
+    template_name = "foo.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticleListView, self).get_context_data(**kwargs)
+        return context
+        

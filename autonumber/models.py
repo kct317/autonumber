@@ -1,5 +1,24 @@
 # coding:utf-8
 from django.db import models
+
+"""
+每个类都包含字段及相应的OP函数，
+然后在views.py直接调用
+    from autonumber.models import * 
+    在具体的函数里面新建对象，调用方法，返回结果作为字典参数传入render的网页模板
+
+
+外键forignkey
+    class B(models.Model):
+        val = models.ForeignKey(类A)     类B的外键val是关联类A
+
+多对多many-to-many
+    class B(models.Model):
+        val = models.ManyToManyField(类A)     类B的ManyToMany val是关联类A
+        val1 = A()                            可以新建自定义类
+    m = B。objects.get(id=1)
+    m.val.filter(类字段名字_icontains='p')
+"""
  
 class Article(models.Model):
     title = models.CharField(u'标题', max_length=256)
