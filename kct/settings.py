@@ -32,7 +32,7 @@ CACHE_BACKEND = 'memcache://127.0.0.1:12111'
 #python manage.py createcachetable mycache
 #进入mysql 可以看到一个新的数据库 mycache
 #CACHE_BACKEND = 'db://mycache'
-#CACHE_BACKEND = 'fole:// /tmp/django/cache'
+#CACHE_BACKEND = 'file:// /tmp/django/cache'
 
 # Application definition
 
@@ -48,15 +48,25 @@ INSTALLED_APPS = [
     'autonumber.templatetags'
 ]
 
+#中间件
+"""
+    __init__
+    process_request
+    process_view
+    process_response
+    process_exception
+"""
 MIDDLEWARE_CLASSES = [
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', #使用会话
+    'django.middleware.common.CommonMiddleware', #
+    'django.middleware.csrf.CsrfViewMiddleware', #防止csrf攻击
+    'django.contrib.auth.middleware.AuthenticationMiddleware', #认证
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.http.SetRemoteAddrFromForwardedFor',
 ]
 
 ROOT_URLCONF = 'kct.urls'

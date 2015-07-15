@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django import forms
 from autonumber.models import * 
 from  django.views.generic.list import ListView
-
+from django.core.cache import cache
+from django.decorators.cache import cache_page
 
 def index(request):
     return HttpResponse(u"welcome !")
@@ -69,7 +70,6 @@ def foo(request, func, Month, Day):
         return func(request, num)
     return footest(request)
 
-
 class ArticleListView(ListView):
     model = Article
     #queryset = Article.objects.filter(content_icontains="aaa")
@@ -79,4 +79,22 @@ class ArticleListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArticleListView, self).get_context_data(**kwargs)
         return context
-        
+
+"""
+局部缓存，下面只缓存变量article
+"""
+def view3(request):
+    if cache.get('article'):
+        b = cache.get('article')
+    else:
+        b = Article.objects.all
+        cache.set('article', b)
+    return render(request, 'foo.html', {'object_list':b})
+
+"""
+对整个视图进行缓存
+"""
+@cache_page(60*15)
+def view4(request):
+    b = Article.objects.all
+    return render(request, 'foo.html', {'object_list':b})
