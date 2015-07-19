@@ -66,7 +66,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'django.middleware.http.SetRemoteAddrFromForwardedFor',
+    #'django.middleware.http.SetRemoteAddrFromForwardedFor',
 ]
 
 ROOT_URLCONF = 'kct.urls'

@@ -43,8 +43,12 @@ urlpatterns = [
 	url(r'^form_get/$', autoviews.form_get), # http://127.0.0.1:8000/form_get
 	url(r'^form1/$', autoviews.form1), # http://127.0.0.1:8000/form1
 	url(r'^test/$', autoviews.test), # http://127.0.0.1:8000/test
+
+	# 同一个view函数入口，不同函数作为参数
 	url(r'^foo1/(?P<Month>\d+)/(?P<Day>\d+)/$', autoviews.foo, {'func':autoviews.view1}), # http://127.0.0.1:8000/foo1/7/12
 	url(r'^foo2/(?P<Month>\d+)/(?P<Day>\d+)/$', autoviews.foo, {'func':autoviews.view2}), # http://127.0.0.1:8000/foo2/7/12
+
+
 	url(r'^foo3/', autoviews.ArticleListView.as_view(), {'func':autoviews.view1}), # http://127.0.0.1:8000/foo3/   通用视图
 	url(r'^view3/', autoviews.view3), # http://127.0.0.1:8000/view3/   使用缓存
 

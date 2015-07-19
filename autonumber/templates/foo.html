@@ -20,11 +20,15 @@
 </head>
 <body>
 	{{ num }}
+
+	<!-- 过滤器 -->
 	{{ key | cut:"o"}}
+
+	<!-- 自定义标签 -->
 	{% current_time "%Y-%m-%d %H:%M:%S" %}
 
 	{% for b in object_list %}
-			{{ b.title }}
-		{% endfor %}
+		{{ b.title }}
+	{% endfor %}
 </body>
 </html>

@@ -5,7 +5,7 @@ from django import forms
 from autonumber.models import * 
 from  django.views.generic.list import ListView
 from django.core.cache import cache
-from django.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page
 
 def index(request):
     return HttpResponse(u"welcome !")
