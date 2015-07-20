@@ -55,9 +55,6 @@ def form1(request):
 def test(request):
     return render(request, 'test.html')
 
-def elenve(request):
-    return render(request, '11.html')
-
 def view1(request, num):
     return render(request, 'foo.html', {'num': int(num), 'key':"hello"})
 
@@ -98,3 +95,6 @@ def view3(request):
 def view4(request):
     b = Article.objects.all
     return render(request, 'foo.html', {'object_list':b})
+
+
+

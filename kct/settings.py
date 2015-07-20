@@ -28,11 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-CACHE_BACKEND = 'memcache://127.0.0.1:12111'
 #python manage.py createcachetable mycache
 #进入mysql 可以看到一个新的数据库 mycache
-#CACHE_BACKEND = 'db://mycache'
+CACHE_BACKEND = 'db://mycache'
 #CACHE_BACKEND = 'file:// /tmp/django/cache'
+#CACHE_BACKEND = 'memcache://127.0.0.1:12111'
 
 # Application definition
 

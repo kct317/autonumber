@@ -19,7 +19,7 @@ from django.db import models
     m = B。objects.get(id=1)
     m.val.filter(类字段名字_icontains='p')
 """
- 
+
 class Article(models.Model):
     title = models.CharField(u'标题', max_length=256)
     content = models.TextField(u'内容')
