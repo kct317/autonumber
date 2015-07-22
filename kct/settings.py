@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-	'autonumber',
-    'autonumber.templatetags'
+	'app.autonumber',
+    'app.autonumber.templatetags'
 ]
 
 #中间件

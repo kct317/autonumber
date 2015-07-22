@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django import forms
 from autonumber.models import * 
-from  django.views.generic.list import ListView
+from django.views.generic.list import ListView
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 
