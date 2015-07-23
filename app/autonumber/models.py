@@ -51,6 +51,14 @@ class Person(models.Model):
         return self.first_name + self.last_name
 
 
+class User(models.Model):
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.username
+
+
 class Case(models.Model):
     casename = models.CharField(max_length=128) #案件名称
 

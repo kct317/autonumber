@@ -53,6 +53,10 @@ urlpatterns = [
 	url(r'^view3/', autoviews.view3), # http://127.0.0.1:8000/view3/   使用缓存
 
 	# login
+	url(r'^login/', autoviews.login), # 登陆页
+	url(r'^register/', autoviews.register), # 注册页
+	url(r'^logout/', autoviews.logout), # 注销
+	url(r'^index/', autoviews.index), # 登陆成功页
 
 
 	# logout
