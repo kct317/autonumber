@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from autonumber import views as autoviews
-from  django.views.generic.list import ListView
+from app.autonumber import views as autoviews
+from django.views.generic.list import ListView
 
 """
 配置方法
@@ -36,7 +36,7 @@ urlpatterns = [
 	# test
 	url(r'^$', autoviews.index), # http://127.0.0.1:8000/
 	url(r'^add/$', autoviews.add), # http://127.0.0.1:8000/add/?a=4&b=5
-	url(r'^add2/(\d+)/(\d+)/$', autoviews.add2), # http://127.0.0.1:8000/add2/4/5/
+	url(r'^add2/(\d+)/(\d+)/$', autoviews.add2), # http://127.0.0.1:8000/add2/5/5/
 	url(r'^link/$', autoviews.link), # http://127.0.0.1:8000/link
 	url(r'^home/$', autoviews.home), # http://127.0.0.1:8000/home
 	url(r'^json/$', autoviews.json), # http://127.0.0.1:8000/json
