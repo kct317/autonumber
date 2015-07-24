@@ -6,6 +6,8 @@ from app.autonumber.models import *
 from django.views.generic.list import ListView
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
+from django.http import HttpResponseRedirect 
+from django.template import RequestContext 
 
 def index(request):
     return HttpResponse(u"welcome !")
@@ -106,9 +108,9 @@ class UserForm(forms.Form):
     password = forms.CharField(label='密码',widget=forms.PasswordInput())
 
 #登陆
-def login(req):
-    if req.method == 'POST':
-        uf = UserForm(req.POST)
+def login(request):
+    if request.method == 'POST':
+        uf = UserForm(request.POST)
         if uf.is_valid():
             #获取表单用户密码
             username = uf.cleaned_data['username']
@@ -126,7 +128,7 @@ def login(req):
                 return HttpResponseRedirect('/login/')
     else:
         uf = UserForm()
-    return render(request,'login.html',{'uf':uf},context_instance=RequestContext(req))
+    return render(request,'login.html', {'uf':uf}, context_instance=RequestContext(request))
 
 #注册
 def register(request):
@@ -141,15 +143,15 @@ def register(request):
             return HttpResponse('register success!!')
     else:
         uf = UserForm()
-    return render_to_response('register.html',{'uf':uf}, context_instance=RequestContext(request))
+    return render(request,'register.html',{'uf':uf}, context_instance=RequestContext(request))
 
 #登陆成功
-def index(req):
-    username = req.COOKIES.get('username','')
-    return render_to_response('index.html' ,{'username':username})
+def index(request):
+    username = request.COOKIES.get('username','')
+    return render(request,'index.html' ,{'username':username})
 
 #退出
-def logout(req):
+def logout(request):
     response = HttpResponse('logout !!')
     #清理cookie里保存username
     response.delete_cookie('username')
