@@ -107,6 +107,24 @@ class UserForm(forms.Form):
     username = forms.CharField(label='用户名',max_length=100)
     password = forms.CharField(label='密码',widget=forms.PasswordInput())
 
+    def as_myp(self):
+        "Returns this form rendered as HTML <p>s."
+        return self._html_output(
+            normal_row = '<p%(html_class_attr)s>%(label)s</p> <p>%(field)s%(help_text)s</p>',
+            error_row = '%s',
+            row_ender = '</p>',
+            help_text_html = ' <span class="helptext">%s</span>',
+            errors_on_separate_row = True)
+
+    def as_plain(self):
+        "Returns this form rendered as HTML <tr>s -- excluding the <table></table>."
+        return self._html_output(
+            normal_row = '%(label)s%(errors)s%(field)s%(help_text)s',
+            error_row = '%s',
+            row_ender = ' ',
+            help_text_html = '<br /><span class="helptext">%s</span>',
+            errors_on_separate_row = False)
+
 #登陆
 def login(request):
     if request.method == 'POST':
