@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<!--
 	<div class="container">
 		<form class="form-signin" role="form" enctype="multipart/form-data">
 			{% csrf_token %}
@@ -35,6 +36,51 @@
 </form>
 <br>
 <a href="http://127.0.0.1:8000/register/">注册</a>
+-->
+
+<div class="container">
+<form class="form-signin" method="post" role="form" enctype="multipart/form-data">
+	{% csrf_token %}
+	<h2 class="form-signin-heading">欢迎登陆</h2>
+    <fieldset>
+        <legend>{{ title }}</legend>
+        {% for field in uf %}
+            {% if field.errors %}
+                <div class="control-group error">
+                    <label class="control-label">{{ field.label }}</label> 
+                    <div class="controls">{{ field }}
+                        <span class="help-inline">
+                            {% for error in  field.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="control-group">
+                    <label class="control-label">{{ field.label }}</label> 
+                    <div class="controls">{{ field }}
+                        {% if field.help_text %}
+                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </fieldset>
+    <lable class="checkbox col-sm-offset-2 col-sm-10">
+		<input type="checkbox" value="remember-me"> 阅读用户协议
+	</lable>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+    <br>
+	<a href="http://127.0.0.1:8000/register/">注册</a>
+	<a href="http://127.0.0.1:8000/register/">忘记密码</a>
+    <!--
+    <div class="form-actions">
+    	<button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        <button type="submit" class="btn btn-primary" >Submit</button>
+    </div>-->
+</form>
+</div>
+
 <!--
 <h2 class="form-signin-heading">欢迎登陆</h2>
 <form method = 'post' class="form-signin" enctype="multipart/form-data">
@@ -49,7 +95,6 @@
     <input type="submit" class="btn btn-lg btn-primary btn-block" value = "登陆" />
 </form>
 -->
-<br>
-<a href="http://127.0.0.1:8000/register/">注册</a>
+
 </body>
 </html>

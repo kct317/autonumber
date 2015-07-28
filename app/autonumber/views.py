@@ -110,7 +110,8 @@ class UserForm(forms.Form):
     def as_myp(self):
         "Returns this form rendered as HTML <p>s."
         return self._html_output(
-            normal_row = '<p%(html_class_attr)s>%(label)s</p> <p>%(field)s%(help_text)s</p>',
+            normal_row = '<div class="form-group">%(label)s</div> <div class="form-group">%(field)s</div>',
+            #normal_row = '<p%(html_class_attr)s>%(label)s</p> <p%>(field)s</p>',
             error_row = '%s',
             row_ender = '</p>',
             help_text_html = ' <span class="helptext">%s</span>',
