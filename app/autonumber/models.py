@@ -20,6 +20,7 @@ from django.db import models
     m.val.filter(类字段名字_icontains='p')
 """
 
+"""
 class Article(models.Model):
     title = models.CharField(u'标题', max_length=256)
     content = models.TextField(u'内容')
@@ -32,7 +33,6 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
-
 
 class Person(models.Model):
     first_name = models.CharField(max_length=50)
@@ -49,46 +49,73 @@ class Person(models.Model):
 
     def __unicode__(self):
         return self.first_name + self.last_name
+"""
+
+class UserGroup(models.Model):
+    gid        = models.AutoField(primary_key=True)
+    groupname  = models.CharField(max_length=50, default='')
+    power      = models.IntegerField(default=0)
+    createtime = models.IntegerField(default=0)
+    updatetime = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.groupname
 
 
 class User(models.Model):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
+    uid        = models.AutoField(primary_key=True)
+    gid        = models.IntegerField(default=0)
+    username   = models.CharField(max_length=50, default='')
+    password   = models.CharField(max_length=50, default='')   #md5加密
+    superman   = models.BooleanField(default=False)
+    lastip     = models.CharField(max_length=50, default='')
+    createtime = models.IntegerField(default=0)
+    updatetime = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.username
 
-
-class Case(models.Model):
-    casename = models.CharField(max_length=128) #案件名称
-
-    litigant = models.CharField(max_length=30) #当事人
-    litiganttype = models.IntegerField() #当事人类型
-
-    caseproperty = models.IntegerField() #案件性质/类型  下拉框
-    casevalue = models.IntegerField() #案值/元
-
-    fines = models.IntegerField() #罚款金额
-    forfeituremoney = models.IntegerField() #没收金额
-
-    forfeitureitem = models.CharField(max_length=128) #没收物品
-    forfeitureamount = models.IntegerField() #没收数量
-
-    illegalfacts = models.TextField() #违法事实
-    law = models.TextField() #违反法律
-    punishbasis = models.TextField() #处罚依据
-
-    createdate = models.DateField() #立案日期
-    informdate = models.DateField() #告知日期
-
-    informnumber = models.CharField(max_length=128) #听证告知书/告知书编号
-    issueddate = models.DateField() #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
-    decisionnumber = models.CharField(max_length=128)  #行政处罚决定书编号
-    handlingunit = models.CharField(max_length=128) #办案单位
-    auditorman = models.CharField(max_length=30) #核审人员（法制员）
-
-    remarkman = models.TextField() #案件备注
+class UserLog(models.Model):
+    logid      = models.AutoField(primary_key=True)
+    uid        = models.IntegerField(default=0)
+    username   = models.CharField(max_length=50, default='')
+    msg        = models.TextField(default='')
+    ip         = models.CharField(max_length=50, default='')
+    createtime = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return self.name
+        return self.msg
 
+
+class Case(models.Model):
+    casename         = models.CharField(max_length=128, default='') #案件名称
+
+    litigant         = models.CharField(max_length=30, default='') #当事人
+    litiganttype     = models.IntegerField(default=0) #当事人类型
+
+    caseproperty     = models.IntegerField(default=0) #案件性质/类型  下拉框
+    casevalue        = models.IntegerField(default=0) #案值/元
+
+    fines            = models.IntegerField(default=0) #罚款金额
+    forfeituremoney  = models.IntegerField(default=0) #没收金额
+
+    forfeitureitem   = models.CharField(max_length=128, default='') #没收物品
+    forfeitureamount = models.IntegerField(default='') #没收数量
+
+    illegalfacts     = models.TextField(default='') #违法事实
+    law              = models.TextField(default='') #违反法律
+    punishbasis      = models.TextField(default='') #处罚依据
+
+    createdate       = models.IntegerField(default=0) #立案日期
+    informdate       = models.IntegerField(default=0) #告知日期
+
+    informnumber     = models.CharField(max_length=128, default='') #听证告知书/告知书编号
+    issueddate       = models.IntegerField(default=0) #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
+    decisionnumber   = models.CharField(max_length=128, default='')  #行政处罚决定书编号
+    handlingunit     = models.CharField(max_length=128, default='') #办案单位
+    auditorman       = models.CharField(max_length=30, default='') #核审人员（法制员）
+
+    remarkman        = models.TextField(default='') #案件备注
+
+    def __unicode__(self):
+        return self.casename

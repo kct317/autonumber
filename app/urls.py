@@ -49,7 +49,7 @@ urlpatterns = [
 	url(r'^foo2/(?P<Month>\d+)/(?P<Day>\d+)/$', autoviews.foo, {'func':autoviews.view2}), # http://127.0.0.1:8000/foo2/7/12
 
 
-	url(r'^foo3/', autoviews.ArticleListView.as_view(), {'func':autoviews.view1}), # http://127.0.0.1:8000/foo3/   通用视图
+	#url(r'^foo3/', autoviews.ArticleListView.as_view(), {'func':autoviews.view1}), # http://127.0.0.1:8000/foo3/   通用视图
 	url(r'^view3/', autoviews.view3), # http://127.0.0.1:8000/view3/   使用缓存
 
 	# login

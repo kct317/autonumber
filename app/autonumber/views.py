@@ -69,6 +69,7 @@ def foo(request, func, Month, Day):
         return func(request, num)
     return footest(request)
 
+"""
 class ArticleListView(ListView):
     model = Article
     #queryset = Article.objects.filter(content_icontains="aaa")
@@ -78,6 +79,7 @@ class ArticleListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArticleListView, self).get_context_data(**kwargs)
         return context
+"""
 
 """
 局部缓存，下面只缓存变量article
