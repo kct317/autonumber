@@ -18,7 +18,7 @@ class ArticleAdmin(admin.ModelAdmin):  #未知这个有什么用
 
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('full_name',)
-"""
+
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username',)
@@ -28,10 +28,13 @@ class CaseAdmin(admin.ModelAdmin):
                     'fines', 'forfeituremoney', 'forfeitureitem', 'forfeitureamount', 'illegalfacts',
                     'law', 'punishbasis', 'createdate', 'informdate', 'informnumber',
                     'issueddate', 'decisionnumber', 'handlingunit', 'auditorman', 'remarkman',)
+"""
+
 
 """
 admin.site.register(Article,ArticleAdmin)
 admin.site.register(Person,PersonAdmin)
-"""
+
 admin.site.register(User,UserAdmin)
 admin.site.register(Case,CaseAdmin)
+"""

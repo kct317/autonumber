@@ -53,7 +53,7 @@ class Person(models.Model):
 
 class UserGroup(models.Model):
     gid        = models.AutoField(primary_key=True)
-    groupname  = models.CharField(max_length=50, default='')
+    groupname  = models.CharField(max_length=50, default='', null=False)
     power      = models.IntegerField(default=0)
     createtime = models.IntegerField(default=0)
     updatetime = models.IntegerField(default=0)
@@ -88,6 +88,7 @@ class UserLog(models.Model):
 
 
 class Case(models.Model):
+    caseid           = models.AutoField(primary_key=True)
     casename         = models.CharField(max_length=128, default='') #案件名称
 
     litigant         = models.CharField(max_length=30, default='') #当事人

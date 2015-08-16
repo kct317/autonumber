@@ -47,7 +47,6 @@ INSTALLED_APPS = [
 	'app.autonumber',  #app
     'app.autonumber.templatetags',    #模板tags
 
-    'south',
 ]
 
 #中间件
@@ -112,6 +111,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(os.path.join(BASE_DIR, 'app'), 'db.sqlite3'),
     }
+'''
+'''
+MIGRATION_MODULES = {
+    'autonumber': 'app.autonumber.migrations',
+}
 '''
 
 
