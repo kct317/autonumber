@@ -53,14 +53,13 @@ class Person(models.Model):
 
 class UserGroup(models.Model):
     gid        = models.AutoField(primary_key=True)
-    groupname  = models.CharField(max_length=50, default='', null=False)
+    groupname  = models.CharField(max_length=50, default='')
     power      = models.IntegerField(default=0)
     createtime = models.IntegerField(default=0)
     updatetime = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.groupname
-
 
 class User(models.Model):
     uid        = models.AutoField(primary_key=True)
@@ -85,7 +84,6 @@ class UserLog(models.Model):
 
     def __unicode__(self):
         return self.msg
-
 
 class Case(models.Model):
     caseid           = models.AutoField(primary_key=True)
