@@ -1,19 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+{% load bootstrap_toolkit %}
+{% load url from future %}
+{% load staticfiles %}
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>注册</title>
+    <meta charset="utf-8">
+    <title>办案取号系统</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    {% bootstrap_javascript_tag %}
+    {% block extra_head %}{% endblock %}
 </head>
 
 <body>
-<h1>注册页面：</h1>
-<form method = 'post' enctype="multipart/form-data">
-    {% csrf_token %}
-    {{uf.as_p}}
-    <input type="submit" value = "ok" />
-</form>
-<br>
-<a href="http://127.0.0.1:8000/login/">登陆</a>
+
+    <h2>修改密码</h2>
+    
+    {% if oldpassword_is_wrong %}
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>错误!</h4>原密码不正确
+        </div>
+    {% endif %}
+    <div class="well">
+        <form class="form-horizontal" action="" method="post">
+            {% csrf_token %}
+            {{ form|as_bootstrap:"horizontal" }}
+            <p class="form-actions">
+                <input type="submit" value="确认修改" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+	
+	<!-- 下面加载，页面显示更快 -->
+	<script src="{% static 'js/jquery-1.9.0.min.js' %}"></script>
 </body>
 </html>

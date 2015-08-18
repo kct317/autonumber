@@ -1,7 +1,9 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from app.autonumber import views as autoviews
+from app.autonumber import viewstest as autoviews
 from django.views.generic.list import ListView
+from app.autonumber.views import index, login, logout, register
+
 
 """
 配置方法
@@ -53,11 +55,12 @@ urlpatterns = [
 	url(r'^view3/', autoviews.view3), # http://127.0.0.1:8000/view3/   使用缓存
 
 	# login
-	url(r'^login/', autoviews.login), # 登陆页
-	url(r'^register/', autoviews.register), # 注册页
-	url(r'^logout/', autoviews.logout), # 注销
-	url(r'^index/', autoviews.index), # 登陆成功页
-
+	url(r'^login/', login.login), # 登陆页      http://127.0.0.1:8000/login/
+	url(r'^register/', register.register), # 注册页
+	url(r'^logout/', logout.logout), # 注销
+	url(r'^index/', index.index), # 登陆成功页
+	url(r'^forgetpwd/', forgetpwd.forgetpwd), # 忘记密码
+	url(r'^resetpwd/', resetpwd.resetpwd), # 重设密码
 
 	# logout
 

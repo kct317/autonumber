@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 	'app.autonumber',  #app
     'app.autonumber.templatetags',    #模板tags
 
+    'bootstrap_toolkit',
 ]
 
 #中间件
@@ -141,9 +142,9 @@ STATIC_URL  = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-    ("css", os.path.join(STATIC_ROOT,'bootstrap/css')),
-    ("js", os.path.join(STATIC_ROOT,'bootstrap/js')),
-    ("fonts", os.path.join(STATIC_ROOT,'bootstrap/fonts')),
-    ("images", os.path.join(STATIC_ROOT,'images')),
+    ("css", os.path.join(STATIC_ROOT,'css')),
+    ("js", os.path.join(STATIC_ROOT,'js')),
+    ("fonts", os.path.join(STATIC_ROOT,'fonts')),
+    ("images", os.path.join(STATIC_ROOT,'img')),
     STATIC_URL
 )
