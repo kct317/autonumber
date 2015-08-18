@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from app.autonumber import viewstest as autoviews
 from django.views.generic.list import ListView
-from app.autonumber.views import index, login, logout, register
+from app.autonumber.views import index, login, logout, register, forgetpwd, resetpwd
 
 
 """

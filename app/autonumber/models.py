@@ -50,7 +50,7 @@ class Person(models.Model):
     def __unicode__(self):
         return self.first_name + self.last_name
 """
-
+"""
 class UserGroup(models.Model):
     gid        = models.AutoField(primary_key=True)
     groupname  = models.CharField(max_length=50, default='')
@@ -84,7 +84,7 @@ class UserLog(models.Model):
 
     def __unicode__(self):
         return self.msg
-
+"""
 class Case(models.Model):
     caseid           = models.AutoField(primary_key=True)
     casename         = models.CharField(max_length=128, default='') #案件名称

@@ -12,24 +12,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 
-from libs.views.form import LoginForm
+from libs.views.form import ForgetPwdForm
 
 
 
-def login(request):
-    if request.method == 'GET':
-        form = LoginForm()
-        return render_to_response('login.html', RequestContext(request, {'form': form,}))
-    else:
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = request.POST.get('username', '')
-            password = request.POST.get('password', '')
-            user = auth.authenticate(username=username, password=password)
-            if user is not None and user.is_active:
-                auth.login(request, user)
-                return render_to_response('index.html', RequestContext(request))
-            else:
-                return render_to_response('login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
-        else:
-            return render_to_response('login.html', RequestContext(request, {'form': form,}))
+def forgetpwd(request):
+    pass

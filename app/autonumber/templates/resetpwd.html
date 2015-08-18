@@ -18,35 +18,33 @@
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
+
     {% bootstrap_javascript_tag %}
     {% block extra_head %}{% endblock %}
 </head>
 
 <body>
 
-    {% if password_is_wrong %}
+    <h2>修改密码</h2>
+    
+    {% if oldpassword_is_wrong %}
         <div class="alert alert-error">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <h4>错误!</h4>用户名或密码错误
+            <h4>错误!</h4>原密码不正确
         </div>
     {% endif %}
-
     <div class="well">
-        <h1 style="text-align:center">办案取号系统</h1>
-        <p> </p>
         <form class="form-horizontal" action="" method="post">
             {% csrf_token %}
             {{ form|as_bootstrap:"horizontal" }}
             <p class="form-actions">
-                <input type="submit" value="登录" class="btn btn-primary">
-                <a href="/forgetpwd/"><input type="button" value="忘记密码" class="btn btn-danger"></a>
-                <a href="/register/"><input type="button" value="注册" class="btn btn-success"></a>
+                <input type="submit" value="确认修改" class="btn btn-primary">
             </p>
         </form>
     </div>
-    
+
     <!-- 下面加载，页面显示更快 -->
     <script src="{% static 'js/jquery-1.9.0.min.js' %}"></script>
+
 </body>
 </html>
