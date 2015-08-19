@@ -89,6 +89,8 @@ TEMPLATES = [
     },
 ]
 
+#TEMPLATE_DIRS
+
 WSGI_APPLICATION = 'app.wsgi.application'
 
 

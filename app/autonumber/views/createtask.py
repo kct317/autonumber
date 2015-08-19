@@ -1,5 +1,6 @@
 #coding:utf-8
 import datetime
+from django.contrib.auth.decorators import login_required
 
 @login_required
 def createtask(request):

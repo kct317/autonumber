@@ -1,6 +1,8 @@
 #coding:utf-8
 from django import forms
+from django.db import models
 from django.contrib.auth.models import User
+from app.autonumber.models import Manager, Database
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
 
 class LoginForm(forms.Form):

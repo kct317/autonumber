@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from app.autonumber import viewstest as autoviews
 from django.views.generic.list import ListView
-from app.autonumber.views import index, login, logout, register, forgetpwd, resetpwd
+from app.autonumber.views import index, login, logout, register, forgetpwd, resetpwd, tasklist, createtask
 
 
 """
@@ -62,7 +62,8 @@ urlpatterns = [
 	url(r'^forgetpwd/', forgetpwd.forgetpwd), # 忘记密码
 	url(r'^resetpwd/', resetpwd.resetpwd), # 重设密码
 
-	# logout
-
+	# Business
+	url(r'^tasklist/', tasklist.tasklist), # 任务列表
+	url(r'^createtask/', createtask.createtask), # 创建任务
 
 ]
