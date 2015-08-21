@@ -101,6 +101,8 @@ def view4(request):
     return render(request, 'foo.html', {'object_list':b})
 
 
+def templateview(request):
+    return render(request, 'base.html', {'has_permission':True, 'site_url':True,} )
 
 """
 登录相关

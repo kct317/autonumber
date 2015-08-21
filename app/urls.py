@@ -54,6 +54,9 @@ urlpatterns = [
 	#url(r'^foo3/', autoviews.ArticleListView.as_view(), {'func':autoviews.view1}), # http://127.0.0.1:8000/foo3/   通用视图
 	url(r'^view3/', autoviews.view3), # http://127.0.0.1:8000/view3/   使用缓存
 
+	url(r'^templateview/', autoviews.templateview), # http://127.0.0.1:8000/templateview/   使用缓存
+	
+
 	# login
 	url(r'^login/', login.login), # 登陆页      http://127.0.0.1:8000/login/
 	url(r'^register/', register.register), # 注册页
@@ -63,6 +66,7 @@ urlpatterns = [
 	url(r'^resetpwd/', resetpwd.resetpwd), # 重设密码
 
 	# Business
+	url(r'^accounts/login/$', login.login), # 登陆页
 	url(r'^tasklist/', tasklist.tasklist), # 任务列表
 	url(r'^createtask/', createtask.createtask), # 创建任务
 
