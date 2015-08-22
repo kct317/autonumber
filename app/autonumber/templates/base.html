@@ -55,6 +55,8 @@
         {% block nav-global %}{% endblock %}
     </div>
     <!-- END Header -->
+
+    
     {% block breadcrumbs %}
     <div class="breadcrumbs">
     <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
@@ -84,7 +86,9 @@
     </div>
     <!-- END Content -->
 
+    <!-- footer -->
     {% block footer %}<div id="footer"></div>{% endblock %}
+    <!-- END footer -->
 </div>
 <!-- END Container -->
 
