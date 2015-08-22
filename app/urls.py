@@ -59,6 +59,7 @@ urlpatterns = [
 
 	# login
 	url(r'^login/', login.login), # 登陆页      http://127.0.0.1:8000/login/
+	url(r'^accounts/login/$', login.login), # 登陆页
 	url(r'^register/', register.register), # 注册页
 	url(r'^logout/', logout.logout), # 注销
 	url(r'^index/', index.index), # 登陆成功页
@@ -66,7 +67,6 @@ urlpatterns = [
 	url(r'^resetpwd/', resetpwd.resetpwd), # 重设密码
 
 	# Business
-	url(r'^accounts/login/$', login.login), # 登陆页
 	url(r'^tasklist/', tasklist.tasklist), # 任务列表
 	url(r'^createtask/', createtask.createtask), # 创建任务
 
