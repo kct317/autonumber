@@ -31,7 +31,8 @@ def resetpwd(request):
                 newpassword = request.POST.get('newpassword1', '')  
                 user.set_password(newpassword)  
                 user.save()  
-                return render_to_response('index.html', RequestContext(request,{'changepwd_success':True}))  
+                return HttpResponseRedirect("/login/")
+                #return render_to_response('index.html', RequestContext(request,{'changepwd_success':True}))  
             else:  
                 return render_to_response('resetpwd.html', RequestContext(request, {'form': form,'oldpassword_is_wrong':True}))  
         else:  

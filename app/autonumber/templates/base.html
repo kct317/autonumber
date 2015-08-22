@@ -30,13 +30,10 @@
         {% if has_permission %}
         <div id="user-tools">
             {% block welcome-msg %}
-                {% trans 'Welcome,' %}
-                <strong>{% firstof username %}</strong>
+                {% trans '欢迎,' %}
+                <strong>{% firstof username %}.</strong>
             {% endblock %}
             {% block userlinks %}
-                {% if site_url %}
-                    <a href="{{ site_url }}">{% trans 'View site' %}</a> /
-                {% endif %}
                 {% if user.is_active and user.is_staff %}
                     {% url 'django-admindocs-docroot' as docsroot %}
                     {% if docsroot %}
@@ -44,9 +41,9 @@
                     {% endif %}
                 {% endif %}
                 {% if user.has_usable_password %}
-                <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
+                <a href="/resetpwd/">{% trans '修改密码' %}</a> /
                 {% endif %}
-                <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+                <a href="/logout/">{% trans '安全登出' %}</a>
             {% endblock %}
         </div>
         {% endif %}

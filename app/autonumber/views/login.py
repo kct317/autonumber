@@ -28,7 +28,9 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
-                return render_to_response('index.html', RequestContext(request, {'username': username, 'has_permission':True, 'site_url':True,}))
+                request.session['username'] = username
+                return HttpResponseRedirect("/index/")
+                #return render_to_response('index.html', RequestContext(request, {'username': username, 'has_permission':True, 'site_url':True,}))
             else:
                 return render_to_response('login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
         else:

@@ -15,12 +15,8 @@ from django.contrib.auth.decorators import login_required
 """
 登录相关
 """
-#退出
+#登陆成功
 @login_required
-def logout(request):
-    auth.logout(request)
-    try:
-        del request.session['username']
-    except KeyError:
-        pass
-    return HttpResponseRedirect("/login/")
+def index(request):
+	username = request.session.get('username','')
+	return render_to_response('index.html', RequestContext(request, {'username': username, 'has_permission':True, 'site_url':True, 'docsroot':''}))

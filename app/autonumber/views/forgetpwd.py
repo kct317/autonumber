@@ -17,4 +17,14 @@ from libs.views.form import ForgetPwdForm
 
 
 def forgetpwd(request):
-    pass
+    if request.method == 'GET':  
+        form = ForgetPwdForm()  
+        return render_to_response('forgetpwd.html', RequestContext(request, {'form': form,}))
+    else:  
+        form = ForgetPwdForm(request.POST)  
+        if form.is_valid():  
+            email = request.POST.get('email', '')
+            #将重置密码的特殊链接发邮箱
+            return HttpResponseRedirect("/login/")
+        else:  
+            return render_to_response('forgetpwd.html', RequestContext(request, {'form': form,}))
