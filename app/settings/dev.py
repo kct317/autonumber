@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'app.autonumber.templatetags',    #模板tags
 
     'bootstrap_toolkit',
+
 ]
 
 #中间件
@@ -69,6 +70,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     #'django.middleware.http.SetRemoteAddrFromForwardedFor',
+
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -103,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', #数据库引擎
         'NAME': 'autonumber',                 #数据库名
         'USER': 'root',                       #用户名
-        'PASSWORD': 'comgointheworld!@#123',  #密码
+        'PASSWORD': 'donotuseroot!@#123',  #密码
         'HOST': '127.0.0.1',                  #数据库主机 默认为localhost
         'PORT': 3306,                         #数据库端口 MySQL默认为3306
     }
