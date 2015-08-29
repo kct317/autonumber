@@ -4,6 +4,7 @@
 <head>
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 {% block extrastyle %}{% endblock %}
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
@@ -14,71 +15,79 @@
 </head>
 {% load i18n %}
 
-<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+<body>
 
 <!-- Container -->
 <div id="container">
 
-    {% if not is_popup %}
-        <!-- Header -->
+    <!-- Header -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
-            <div class="navbar-header">
-                {% block navbarbranding %}
-                <a href="#" class="navbar-brand">办案取号系统</a>
-                {% endblock %}
-            </div>
-            {% block usertools %}
-                {% if has_permission %}
-                <div id="user-tools">
-                    {% block welcome-msg %}
-                        {% trans '欢迎,' %}
-                        <strong>{% firstof username %}.</strong>
-                    {% endblock %}
-                    {% block userlinks %}
-                        {% if user.is_active and user.is_staff %}
-                            {% url 'django-admindocs-docroot' as docsroot %}
-                            {% if docsroot %}
-                                <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-                            {% endif %}
-                        {% endif %}
-                        {% if user.has_usable_password %}
-                        <a href="/resetpwd/">{% trans '修改密码' %}</a> /
-                        {% endif %}
-                        <a href="/logout/">{% trans '安全登出' %}</a>
+            {% block header %}
+                <div class="navbar-header">
+                    {% block navbarbranding %}
+                    <a href="#" class="navbar-brand">办案取号系统</a>
                     {% endblock %}
                 </div>
-                {% endif %}
+                {% block usertools %}
+                    {% if has_permission %}
+                    <div id="user-tools">
+                        {% block welcome-msg %}
+                            {% trans '欢迎,' %}
+                            <strong>{% firstof username %}.</strong>
+                        {% endblock %}
+                        {% block userlinks %}
+                            {% if user.is_active and user.is_staff %}
+                                {% url 'django-admindocs-docroot' as docsroot %}
+                                {% if docsroot %}
+                                    <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
+                                {% endif %}
+                            {% endif %}
+                            {% if user.has_usable_password %}
+                            <a href="/resetpwd/">{% trans '修改密码' %}</a> /
+                            {% endif %}
+                            <a href="/logout/">{% trans '安全退出' %}</a>
+                        {% endblock %}
+                    </div>
+                    {% endif %}
+                {% endblock %}
             {% endblock %}
         </div>
-        <!-- END Header -->
-    {% endif %}
+    </nav>
+    <!-- END Header -->
 
     <!-- Content -->
     <div class="container">
         <div class="row">
+            {% block content %}
             <div class="col-md-2 left">
                 {% block left_panel %}
+                {% if user.is_superuser %}
                 
+                {% endif %}
                 {% endblock %}
             </div>
 
             <div class="col-md-7 middle">
-                {% block main %}
-
+                {% block main_panel %}
+                
                 {% endblock %}
             </div>
 
             <div class="col-md-3 right">
                 {% block right_panel %}
-
+                
                 {% endblock %}
             </div>
+            {% endblock %}
         </div>
     </div>
     <!-- END Content -->
 
     <!-- footer -->
-    {% block footer %}<div id="footer"></div>{% endblock %}
+    {% block footer %}
+    <div id="footer"></div>
+    {% endblock %}
     <!-- END footer -->
 </div>
 <!-- END Container -->
