@@ -14,21 +14,18 @@ from django.contrib.auth.decorators import login_required
 
 from app.autonumber.config import CONFIG
 
-"""
-登录相关
-"""
-#登陆成功
+
 @login_required
-def index(request):
+def index_list(request, model, place, type):
     username = request.session.get('username','')
     has_permission = False
     if username != '':
         has_permission = True
-    
+    obj_list = model.objects.all()
+
     pydata = {}
     pydata['username'] = username
     pydata['has_permission'] = has_permission
     pydata['CONFIG'] = CONFIG
-    return render(request, 'index.html', pydata)
-    #return render(request, 'index.html', {'username': username, 'has_permission':has_permission, 'CONFIG':CONFIG})
-    #return render_to_response('index.html', RequestContext(request, {'username': username, 'has_permission':has_permission, 'CONFIG':CONFIG}))
+    pydata['obj_list'] = obj_list
+    return render(request, 'index_list.html', pydata)

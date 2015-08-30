@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block main_panel %}
+    <div class="tabbable" id="tabs-667058">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#panel-582809" data-toggle="tab">所有案件</a>
+            </li>
+            <li>
+                <a href="#panel-582810" data-toggle="tab">登记按键</a>
+            </li>
+            <li>
+                <a href="#panel-582811" data-toggle="tab">导出按键</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="panel-582809">
+                <table class="table">
+                    <thead><tr>
+                        <th>id</th>
+                        <th>文书号</th>
+                        <th>承办单位</th>
+                        <th>当事人</th>
+                        <th>决定书</th>
+                        <th>操作</th>
+                    </tr></thead>
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                            <td>{{ object.caseid }}</td>
+                            <td>{{ object.casename }}</td>
+                            <td>{{ object.handlingunit }}</td>
+                            <td>{{ object.litigant }}</td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="panel-582810">
+                
+            </div>
+            <div class="tab-pane" id="panel-582811">
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
