@@ -16,16 +16,32 @@ from app.autonumber.config import CONFIG
 
 
 @login_required
-def index_list(request, model, place, type):
+def index_list(request, model):
     username = request.session.get('username','')
     has_permission = False
     if username != '':
         has_permission = True
-    obj_list = model.objects.all()
+    show_list = []
+    unit = request.GET.get('unit') or 0 
+    ntype = request.GET.get('type') or 0
+    obj_list = model.objects.filter(documentunit__exact=unit, documenttype__exact=ntype)
 
+    paginator = Paginator(obj_list, 10)
+    page = request.GET.get('page')
+    try:
+        show_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        show_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        show_list = paginator.page(paginator.num_pages)
     pydata = {}
     pydata['username'] = username
     pydata['has_permission'] = has_permission
+    pydata['unit'] = unit
+    pydata['type'] = ntype
     pydata['CONFIG'] = CONFIG
-    pydata['obj_list'] = obj_list
+    pydata['obj_list'] = show_list
     return render(request, 'index_list.html', pydata)
+    

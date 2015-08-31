@@ -91,6 +91,9 @@ class Case(models.Model):
     caseid           = models.AutoField(primary_key=True)
     casename         = models.CharField(max_length=128, default='') #案件名称
 
+    documentunit     = models.IntegerField(default=0) #文书所属单位
+    documenttype     = models.IntegerField(default=0) #文书类型
+
     litigant         = models.CharField(max_length=30, default='') #当事人
     litiganttype     = models.IntegerField(default=0) #当事人类型
 
@@ -112,7 +115,7 @@ class Case(models.Model):
 
     informnumber     = models.CharField(max_length=128, default='') #听证告知书/告知书编号
     issueddate       = models.IntegerField(default=0) #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
-    decisionnumber   = models.CharField(max_length=128, default='')  #行政处罚决定书编号
+    decisionnumber   = models.CharField(max_length=128, default='')  #行政处罚决定书编号   鹤工商处字 [2015] 00001号
     handlingunit     = models.CharField(max_length=128, default='') #办案单位
     auditorman       = models.CharField(max_length=30, default='') #核审人员（法制员）
 

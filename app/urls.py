@@ -61,17 +61,17 @@ urlpatterns = [
 	
 
 	# login
-	url(r'^login/', login.login, name='login'), # 登陆页      http://127.0.0.1:8000/login/
+	url(r'^login/$', login.login, name='login'), # 登陆页      http://127.0.0.1:8000/login/
 	url(r'^accounts/login/$', login.login, name='accounts_login'), # 登陆页
 	url(r'^register/', register.register, name='register'), # 注册页
 	url(r'^logout/', logout.logout, name='logout'), # 注销
-	url(r'^index/', index.index, name='index'), # 登陆成功页
+	url(r'^index/$', index.index, name='index'), # 登陆成功页
 	url(r'^forgetpwd/', forgetpwd.forgetpwd, name='forgetpwd'), # 忘记密码
 	url(r'^resetpwd/', resetpwd.resetpwd, name='resetpwd'), # 重设密码
 
 	# Business
 	#url(r'^tasklist/', tasklist.tasklist), # 任务列表
 	#url(r'^createtask/', createtask.createtask), # 创建任务
-	url(r'^index/(?P<place>\d+)/(?P<type>\d+)/)', index_list.index_list, {'model': models.Case}, name='index_list'), # 创建任务
+	url(r'^index_list/$', index_list.index_list, {'model': models.Case}, name='index_list'), # 创建任务
 	
 ]

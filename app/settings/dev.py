@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'app.autonumber.templatetags',    #模板tags
 
     'bootstrap_toolkit',
-
 ]
 
 #中间件
