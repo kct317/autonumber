@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from app.autonumber.views import index, login, logout
 from app.autonumber.views import register, forgetpwd, resetpwd
 from app.autonumber.views import tasklist, createtask, createtask
-from app.autonumber.views import index_list
+from app.autonumber.views import entry, index_list
 from app.autonumber import models
 
 """
@@ -72,6 +72,6 @@ urlpatterns = [
 	# Business
 	#url(r'^tasklist/', tasklist.tasklist), # 任务列表
 	#url(r'^createtask/', createtask.createtask), # 创建任务
-	url(r'^index_list/$', index_list.index_list, {'model': models.Case}, name='index_list'), # 创建任务
+	url(r'^index_list/$', entry.entry , {'model': models.Case, 'func':index_list.index_list}, name='index_list'), # 创建任务
 	
 ]

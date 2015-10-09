@@ -45,7 +45,14 @@
                 {% bootstrap_pagination obj_list url="/index_list/{{unit}}/{{type}}?page=1" align="center" size="small" %}
             </div>
             <div class="tab-pane" id="panel-582810">
-                
+                <form enctype="multipart/form-data" class="form-horizontal" action="" method="post">
+                    {% csrf_token %}
+                    {{ form|as_bootstrap:"horizontal" }}
+                    <p class="form-actions">
+                            <input type="submit" value="提交" class="btn btn-primary">
+                            <a href="/tasklist/"><input type="button" value="返回" class="btn"></a>
+                    </p>
+                </form>
             </div>
             <div class="tab-pane" id="panel-582811">
                 

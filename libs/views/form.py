@@ -2,8 +2,9 @@
 from django import forms
 from django.db import models
 from django.contrib.auth.models import User
-from app.autonumber.models import Manager, Database
+from app.autonumber.models import Manager, Database, CaseProperty
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
+from app.autonumber.config import CONFIG
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -15,7 +16,7 @@ class LoginForm(forms.Form):
                 'placeholder':u"用户名",
             }
         ),
-    )    
+    )
     password = forms.CharField(
         required=True,
         label=u"密码",
@@ -82,7 +83,7 @@ class RegisterForm(forms.Form):
                 'placeholder':u"用户名",
             }
         ),
-    )    
+    )
     password1 = forms.CharField(
         required=True,
         label=u"密码",
@@ -199,6 +200,175 @@ class CreatetaskForm(forms.Form):
         required=False,
         label=u"附件",
         help_text=u"如果SQL文本过长，超过2000个字符，请上传附件"
+    )
+    def clean(self):
+        if not self.is_valid():
+            raise forms.ValidationError(u"以下红色标记部分为必选项")
+        elif self.cleaned_data['sql'] == u'' and self.cleaned_data['desc'] == u'' :
+            raise forms.ValidationError(u"如果执行SQL为空，描述为必填项")
+        else:
+            cleaned_data = super(CreatetaskForm, self).clean() 
+        return cleaned_data
+
+class CreateCaseForm(forms.Form):
+    creater = forms.CharField(
+        label=u"创建者",
+        widget=BootstrapUneditableInput()
+    )
+    casename = forms.CharField(
+        required=True,
+        label=u"案件名称",
+        widget=BootstrapUneditableInput()
+    )
+    caseproname = forms.ModelChoiceField(
+        queryset=CaseProperty.objects.values_list("caseproname",flat=True),
+        required=True,
+        label=u"案件类型",
+        error_messages={'required': u'必选项'},
+    )
+    litigant = forms.CharField(
+        required=False,
+        label=u"当事人",
+        error_messages={'required': '请输入当事人'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"当事人",
+            }
+        ),
+    )
+    litiganttype = forms.CharField(
+        required=False,
+        label=u"当事人类型",
+        error_messages={'required': '请输入当事人类型'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"当事人类型",
+            }
+        ),
+    )
+    casevalue = forms.CharField(
+        required=False,
+        label=u"案值",
+        error_messages={'required': '请输入案值'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"案值",
+            }
+        ),
+    )
+    fines = forms.CharField(
+        required=False,
+        label=u"罚款金额",
+        error_messages={'required': '请输入罚款金额'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"罚款金额",
+            }
+        ),
+    )
+    forfeituremoney = forms.CharField(
+        required=False,
+        label=u"没收金额",
+        error_messages={'required': '请输入没收金额'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"没收金额",
+            }
+        ),
+    )
+    forfeitureitem = forms.CharField(
+        required=False,
+        label=u"没收物品",
+        error_messages={'required': '请输入没收物品'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"没收物品",
+            }
+        ),
+    )
+    illegalfacts = forms.CharField(
+        required=False,
+        label=u"违法事实",
+        error_messages={'required': '请输入违法事实'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"违法事实",
+            }
+        ),
+    )
+    law = forms.CharField(
+        required=False,
+        label=u"违反法律",
+        error_messages={'required': '请输入违反法律'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"违反法律",
+            }
+        ),
+    )
+    punishbasis = forms.CharField(
+        required=True,
+        label=u"处罚依据",
+        error_messages={'required': '请输入处罚依据'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"处罚依据",
+            }
+        ),
+    )
+    #createdate = forms.DateTimeField(
+    #    widget=widgets.AdminDateWidget(), 
+    #    label=u'立案日期'
+    #)
+    informdate = forms.CharField(
+        required=True,
+        label=u"立案日期",
+        error_messages={'required': '请输入立案日期'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"立案日期",
+            }
+        ),
+    )
+    litiganttype = forms.CharField(
+        required=True,
+        label=u"当事人类型",
+        error_messages={'required': '请输入当事人类型'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"当事人类型",
+            }
+        ),
+    )
+    litiganttype = forms.CharField(
+        required=True,
+        label=u"当事人类型",
+        error_messages={'required': '请输入当事人类型'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"当事人类型",
+            }
+        ),
+    )
+    litiganttype = forms.CharField(
+        required=True,
+        label=u"当事人类型",
+        error_messages={'required': '请输入当事人类型'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"当事人类型",
+            }
+        ),
+    )
+    litiganttype = forms.CharField(
+        required=True,
+        label=u"当事人类型",
+        error_messages={'required': '请输入当事人类型'},
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':u"当事人类型",
+            }
+        ),
     )
     def clean(self):
         if not self.is_valid():

@@ -55,7 +55,12 @@ def form1(request):
     return render(request, 'form1.html', {'form': form})
 
 def test(request):
-    return render(request, 'test.html')
+    return render(request, 'test.html', 
+        {'categories':
+            [{'name':'aaaa',},
+            {'name':'bbbb',},
+            ],
+        })
 
 def view1(request, num):
     return render(request, 'foo.html', {'num': int(num), 'key':"hello"})

@@ -62,7 +62,7 @@
         {% block header %}
             <div class="navbar-header">
                 {% block navbarbranding %}
-                <a href="#" class="navbar-brand">办案取号系统</a>
+                <a href="{% url 'index' %}" class="navbar-brand">{{CONFIG.sysname}}</a>
                 {% endblock %}
             </div>
             {% block usertools %}
@@ -89,12 +89,13 @@
     <div id="Content" class="row-fluid">
         <!-- left menu starts -->
         <div class="span2 main-menu-span">
-            <div class="well nav-collapse sidebar-nav bs-example-js-navbar-scrollspy">
-                <ul class="nav nav-tabs nav-stacked main-menu">
+            <div class="well nav-collapse sidebar-nav ">
+                <ul class="nav nav-tabs nav-stacked main-menu in">
                 {% if has_permission %}
                     {% block left_panel %}
                         {% for item in CONFIG.left_panel %}
-                            <li class="nav-header hidden-tablet" style="cursor:pointer;">{{item.name}}</li>
+                            <li class="nav-header hidden-tablet" style="cursor:pointer;">{{item.name}}
+                            </li>
                             <ul class="nav nav-tabs nav-stacked main-menu">
                             {% for keyson, valueson in item.list.items %}
                                 <li>
@@ -117,10 +118,11 @@
                         {% endif %}
                     {% endblock %}
                 {% endif %}
-                </ul>                   
+                </ul>
             </div>
         </div>
         <!-- left menu ends --> 
+        
 
         <!-- main menu --> 
         <div id="content" class="span10">
@@ -142,7 +144,7 @@
     <!-- footer -->
     {% block footer %}
     <div id="footer" class="span12">
-        <p class="center">&copy;2015  Powered by: <a href="#">{{CONFIG.sysname}}</a></p>
+        <p class="center">&copy;2015  Powered by: <a href="{% url 'index' %}">{{CONFIG.sysname}}</a></p>
     </div>
     {% endblock %}
     <!-- END footer -->

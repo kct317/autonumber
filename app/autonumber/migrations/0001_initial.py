@@ -2,22 +2,25 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Case',
             fields=[
-                ('caseid', models.AutoField(serialize=False, primary_key=True)),
+                ('caseid', models.AutoField(primary_key=True, serialize=False)),
                 ('casename', models.CharField(max_length=128, default='')),
+                ('documentunit', models.IntegerField(default=0)),
+                ('documenttype', models.IntegerField(default=0)),
                 ('litigant', models.CharField(max_length=30, default='')),
                 ('litiganttype', models.IntegerField(default=0)),
-                ('caseproperty', models.IntegerField(default=0)),
                 ('casevalue', models.IntegerField(default=0)),
                 ('fines', models.IntegerField(default=0)),
                 ('forfeituremoney', models.IntegerField(default=0)),
@@ -37,37 +40,72 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='User',
+            name='CaseProperty',
             fields=[
-                ('uid', models.AutoField(serialize=False, primary_key=True)),
-                ('gid', models.IntegerField(default=0)),
-                ('username', models.CharField(max_length=50, default='')),
-                ('password', models.CharField(max_length=50, default='')),
-                ('superman', models.BooleanField(default=False)),
-                ('lastip', models.CharField(max_length=50, default='')),
-                ('createtime', models.IntegerField(default=0)),
-                ('updatetime', models.IntegerField(default=0)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('caseproname', models.CharField(max_length=128, default='')),
             ],
         ),
         migrations.CreateModel(
-            name='UserGroup',
+            name='Database',
             fields=[
-                ('gid', models.AutoField(serialize=False, primary_key=True)),
-                ('groupname', models.CharField(max_length=50, default='')),
-                ('power', models.IntegerField(default=0)),
-                ('createtime', models.IntegerField(default=0)),
-                ('updatetime', models.IntegerField(default=0)),
+                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('databasename', models.CharField(max_length=30, default='')),
+                ('databaseip', models.CharField(max_length=30, default='')),
             ],
         ),
         migrations.CreateModel(
-            name='UserLog',
+            name='Dba',
             fields=[
-                ('logid', models.AutoField(serialize=False, primary_key=True)),
-                ('uid', models.IntegerField(default=0)),
-                ('username', models.CharField(max_length=50, default='')),
-                ('msg', models.TextField(default='')),
-                ('ip', models.CharField(max_length=50, default='')),
-                ('createtime', models.IntegerField(default=0)),
+                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('username', models.CharField(max_length=30, default='')),
+                ('first_name', models.CharField(max_length=30, default='')),
+                ('last_name', models.CharField(max_length=30, default='')),
+                ('email', models.EmailField(max_length=70, default='')),
             ],
+        ),
+        migrations.CreateModel(
+            name='Manager',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('username', models.CharField(max_length=30, default='')),
+                ('first_name', models.CharField(max_length=30, default='')),
+                ('last_name', models.CharField(max_length=30, default='')),
+                ('email', models.EmailField(max_length=70, default='')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='State',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('statename', models.CharField(max_length=20, default='')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Task',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('sql', models.CharField(max_length=2000, blank=True, null=True)),
+                ('desc', models.CharField(max_length=2000, blank=True, null=True)),
+                ('createdtime', models.DateTimeField()),
+                ('lastupdatedtime', models.DateTimeField(blank=True, null=True)),
+                ('dbacomment', models.CharField(max_length=2000, blank=True, null=True)),
+                ('attachment', models.FileField(blank=True, upload_to='tasks', null=True)),
+                ('creater', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('databases', models.ManyToManyField(to='autonumber.Database')),
+                ('dba', models.ForeignKey(to='autonumber.Dba')),
+                ('manager', models.ForeignKey(to='autonumber.Manager')),
+                ('state', models.ForeignKey(to='autonumber.State')),
+            ],
+        ),
+        migrations.AddField(
+            model_name='case',
+            name='caseproperty',
+            field=models.ForeignKey(to='autonumber.CaseProperty'),
+        ),
+        migrations.AddField(
+            model_name='case',
+            name='creater',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
         ),
     ]

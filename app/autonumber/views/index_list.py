@@ -13,17 +13,44 @@ from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 
 from app.autonumber.config import CONFIG
-
+from .common import SessionExpiredMiddleware, GetCaseSerialNumber
+from libs.views.form import CreateCaseForm
 
 @login_required
 def index_list(request, model):
+    if SessionExpiredMiddleware.process_request(session=request.session):
+        return HttpResponseRedirect("/logout/")
     username = request.session.get('username','')
     has_permission = False
     if username != '':
         has_permission = True
-    show_list = []
+
     unit = request.GET.get('unit') or 0 
     ntype = request.GET.get('type') or 0
+
+    if request.method == 'GET':
+        serialnum = GetCaseSerialNumber.get(unit)
+        form = CreateCaseForm(initial={'creater':username, 'casename':serialnum})
+    else:
+        form = CreateCaseForm(request.POST, request.FILES)
+        if form.is_valid():
+            t = Task.objects.create(
+                creater = User.objects.get(username=username),
+                manager = form.cleaned_data['manager'],
+                dba = Dba.objects.get(id=1),
+                state = State.objects.get(statename='Open'),
+                sql = form.cleaned_data['sql'],
+                desc = form.cleaned_data['desc'],
+                createdtime = datetime.datetime.now(),
+                lastupdatedtime = datetime.datetime.now(),
+                attachment = form.cleaned_data['attachment'],
+            )
+            databaselist = form.cleaned_data['databases']
+            for db in databaselist:
+                t.databases.add(db)
+            t.save()
+
+    show_list = []
     obj_list = model.objects.filter(documentunit__exact=unit, documenttype__exact=ntype)
 
     paginator = Paginator(obj_list, 10)
@@ -36,6 +63,7 @@ def index_list(request, model):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         show_list = paginator.page(paginator.num_pages)
+
     pydata = {}
     pydata['username'] = username
     pydata['has_permission'] = has_permission
@@ -43,5 +71,6 @@ def index_list(request, model):
     pydata['type'] = ntype
     pydata['CONFIG'] = CONFIG
     pydata['obj_list'] = show_list
+    pydata['form'] = form
     return render(request, 'index_list.html', pydata)
     

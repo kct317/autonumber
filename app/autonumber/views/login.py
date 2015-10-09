@@ -13,7 +13,8 @@ from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 
 from libs.views.form import LoginForm
-
+from app.autonumber.config import CONFIG
+from .common import SessionExpiredMiddleware
 
 
 def login(request):
@@ -29,6 +30,7 @@ def login(request):
             if user is not None and user.is_active:
                 auth.login(request, user)
                 request.session['username'] = username
+                SessionExpiredMiddleware.set_expiry(request.session)
                 return HttpResponseRedirect("/index/")
                 #return render_to_response('index.html', RequestContext(request, {'username': username, 'has_permission':True, 'site_url':True,}))
             else:
