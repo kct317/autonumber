@@ -1,0 +1,27 @@
+            <div class="panel-group" id="accordion">
+                
+                {% for item in CONFIG.left_panel %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" class="collapsed"><span class="glyphicon glyphicon-list-alt btn-xs"></span>{{item.name}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse {% if '/' = request.path %} in {% endif %}">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tbody>
+                                    {% for keyson, valueson in item.list.items %}
+                                    <tr>
+                                        <td>
+                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="#">{{keyson}}</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
