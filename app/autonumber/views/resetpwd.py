@@ -12,7 +12,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 
-from libs.views.form import ChangepwdForm
+from app.autonumber.form import ChangepwdForm
 
 
 

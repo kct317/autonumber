@@ -8,6 +8,17 @@ from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 from django.http import HttpResponseRedirect 
 from django.template import RequestContext 
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse,HttpResponseRedirect
+from django.shortcuts import render_to_response,RequestContext
+
+@login_required
+def Home(request):
+   return render_to_response('home.html',locals(),RequestContext(request))
+
+def About(request):
+   return render_to_response('about.html',locals(),RequestContext(request))
+
 
 def index(request):
     return HttpResponse(u"welcome !")

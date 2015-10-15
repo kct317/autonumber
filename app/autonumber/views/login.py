@@ -12,7 +12,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 
-from libs.views.form import LoginForm
+from app.autonumber.form import LoginForm
 from app.autonumber.config import CONFIG
 from .common import SessionExpiredMiddleware
 

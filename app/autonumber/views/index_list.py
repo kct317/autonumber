@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 from app.autonumber.config import CONFIG
 from .common import SessionExpiredMiddleware, GetCaseSerialNumber
-from libs.views.form import CreateCaseForm
+from app.autonumber.form import CreateCaseForm
 
 @login_required
 def index_list(request, model):

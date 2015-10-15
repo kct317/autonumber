@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
 	'app.autonumber',  #app
-    'app.autonumber.templatetags',    #模板tags
+    'app.templatetags',    #模板tags
 
     'bootstrap_toolkit',
 ]
@@ -72,7 +72,7 @@ MIDDLEWARE_CLASSES = [
 
 ]
 
-ROOT_URLCONF = 'app.urls'
+ROOT_URLCONF = 'pjsite.urls'
 
 TEMPLATES = [
     {
@@ -92,7 +92,7 @@ TEMPLATES = [
 
 #TEMPLATE_DIRS
 
-WSGI_APPLICATION = 'app.wsgi.application'
+WSGI_APPLICATION = 'pjsite.wsgi.application'
 
 
 # Database
@@ -104,7 +104,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', #数据库引擎
         'NAME': 'autonumber',                 #数据库名
         'USER': 'root',                       #用户名
-        'PASSWORD': 'comgointheworld!@#123',  #密码
+        'PASSWORD': 'donotuseroot!@#123',  #密码
         'HOST': '127.0.0.1',                  #数据库主机 默认为localhost
         'PORT': 3306,                         #数据库端口 MySQL默认为3306
     }
