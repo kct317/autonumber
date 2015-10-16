@@ -29,6 +29,6 @@ def index(request):
     pydata['username'] = username
     pydata['has_permission'] = has_permission
     pydata['CONFIG'] = CONFIG
-    return render(request, 'index.html', pydata)
+    return render_to_response('autonumber/login.html', RequestContext(request, pydata))
     #return render(request, 'index.html', {'username': username, 'has_permission':has_permission, 'CONFIG':CONFIG})
     #return render_to_response('index.html', RequestContext(request, {'username': username, 'has_permission':has_permission, 'CONFIG':CONFIG}))

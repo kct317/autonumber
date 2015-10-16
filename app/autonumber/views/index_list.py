@@ -72,5 +72,5 @@ def index_list(request, model):
     pydata['CONFIG'] = CONFIG
     pydata['obj_list'] = show_list
     pydata['form'] = form
-    return render(request, 'index_list.html', pydata)
+    return render(request, 'autonumber/index_list.html', pydata)
     

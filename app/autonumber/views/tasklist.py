@@ -20,4 +20,4 @@ def tasklist(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         show_lines = paginator.page(paginator.num_pages)
-    return render_to_response('tasklist.html', RequestContext(request, {'lines': show_lines,}))
+    return render_to_response('autonumber/tasklist.html', RequestContext(request, {'lines': show_lines,}))

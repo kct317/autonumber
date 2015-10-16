@@ -40,7 +40,6 @@ urlpatterns = [
 	url(r'^add/$', autoviews.add), # http://127.0.0.1:8000/add/?a=4&b=5
 	url(r'^add2/(\d+)/(\d+)/$', autoviews.add2), # http://127.0.0.1:8000/add2/5/5/
 	url(r'^link/$', autoviews.link), # http://127.0.0.1:8000/link
-	url(r'^home/$', autoviews.home), # http://127.0.0.1:8000/home
 	url(r'^json/$', autoviews.json), # http://127.0.0.1:8000/json
 	url(r'^form_get/$', autoviews.form_get), # http://127.0.0.1:8000/form_get
 	url(r'^form1/$', autoviews.form1), # http://127.0.0.1:8000/form1

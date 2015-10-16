@@ -37,8 +37,6 @@ def link(request):
     tmp = "<a href=\"{% http://127.0.0.1:8000/ 'add2' 4 5 %}\">link</a>"
     return HttpResponse(tmp)
 
-def home(request):
-    return render(request, 'base_ex.html')
 
 def json(request):
     List = ['kct', 'render to template']
@@ -167,7 +165,7 @@ def login(request):
                 return HttpResponseRedirect('/login/')
     else:
         uf = UserForm()
-    return render(request,'login.html', {'uf':uf}, context_instance=RequestContext(request))
+    return render(request,'autonumber/login.html', {'uf':uf}, context_instance=RequestContext(request))
 
 #注册
 def register(request):
@@ -182,12 +180,12 @@ def register(request):
             return HttpResponse('register success!!')
     else:
         uf = UserForm()
-    return render(request,'register.html',{'uf':uf}, context_instance=RequestContext(request))
+    return render(request,'autonumber/register.html',{'uf':uf}, context_instance=RequestContext(request))
 
 #登陆成功
 def index(request):
     username = request.COOKIES.get('username','')
-    return render(request,'index.html' ,{'username':username})
+    return render(request,'autonumber/index.html' ,{'username':username})
 
 #退出
 def logout(request):

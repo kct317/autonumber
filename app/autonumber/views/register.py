@@ -17,7 +17,7 @@ from app.autonumber.form import RegisterForm, LoginForm
 def register(request):
     if request.method == 'GET':  
         form = RegisterForm()  
-        return render_to_response('register.html', RequestContext(request, {'form': form,}))  
+        return render_to_response('autonumber/register.html', RequestContext(request, {'form': form,}))  
     else:  
         form = RegisterForm(request.POST)
         if form.is_valid():  
@@ -27,6 +27,6 @@ def register(request):
             user=User.objects.create_user(username,email,password)
             user.save()#写入数据库
             newform = LoginForm()
-            return render_to_response('login.html', RequestContext(request,{'register_success':True, 'form': newform, })) 
+            return render_to_response('autonumber/login.html', RequestContext(request,{'register_success':True, 'form': newform, })) 
         else:  
-            return render_to_response('register.html', RequestContext(request, {'form': form,}))
+            return render_to_response('autonumber/register.html', RequestContext(request, {'form': form,}))

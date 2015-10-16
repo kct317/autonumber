@@ -8,7 +8,7 @@ def createtask(request):
         form = CreatetaskForm(initial={
         'creater':request.user.last_name + request.user.first_name,
         })
-        return render_to_response('createtask.html', RequestContext(request, {'form': form,}))
+        return render_to_response('autonumber/createtask.html', RequestContext(request, {'form': form,}))
     else:
         form = CreatetaskForm(request.POST,request.FILES)
         if form.is_valid():
@@ -30,4 +30,4 @@ def createtask(request):
             t.save()
             return render_to_response('base.html', RequestContext(request,{'createtask_success':True,}))
         else:
-            return render_to_response('createtask.html', RequestContext(request, {'form': form,}))
+            return render_to_response('autonumber/createtask.html', RequestContext(request, {'form': form,}))

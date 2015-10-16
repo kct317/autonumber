@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
@@ -74,11 +73,13 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'pjsite.urls'
 
+
+APP_ROOT = os.path.join(BASE_DIR, 'app')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(APP_ROOT, 'templates')],   #设置templates的目录
+        'APP_DIRS': True,                                #是否使用app目录下的templates
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -90,14 +91,13 @@ TEMPLATES = [
     },
 ]
 
-#TEMPLATE_DIRS
+
 
 WSGI_APPLICATION = 'pjsite.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
 DATABASES = {
     #  mysql
     'default': {
@@ -151,3 +151,4 @@ STATICFILES_DIRS = (
     ("images", os.path.join(STATIC_ROOT,'img')),
     STATIC_URL
 )
+

@@ -11,7 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
-
+from django.core.urlresolvers import reverse
 from app.autonumber.form import LoginForm
 from app.autonumber.config import CONFIG
 from .common import SessionExpiredMiddleware
@@ -20,7 +20,7 @@ from .common import SessionExpiredMiddleware
 def login(request):
     if request.method == 'GET':
         form = LoginForm()
-        return render_to_response('login.html', RequestContext(request, {'form': form,}))
+        return render_to_response('autonumber/login.html', RequestContext(request, {'form': form,}))
     else:
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -31,9 +31,9 @@ def login(request):
                 auth.login(request, user)
                 request.session['username'] = username
                 SessionExpiredMiddleware.set_expiry(request.session)
-                return HttpResponseRedirect("/index/")
+                return HttpResponseRedirect(reverse('index'))
                 #return render_to_response('index.html', RequestContext(request, {'username': username, 'has_permission':True, 'site_url':True,}))
             else:
-                return render_to_response('login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
+                return render_to_response('autonumber/login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
         else:
-            return render_to_response('login.html', RequestContext(request, {'form': form,}))
+            return render_to_response('autonumber/login.html', RequestContext(request, {'form': form,}))

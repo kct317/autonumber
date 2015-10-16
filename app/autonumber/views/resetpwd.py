@@ -20,7 +20,7 @@ from app.autonumber.form import ChangepwdForm
 def resetpwd(request):  
     if request.method == 'GET':  
         form = ChangepwdForm()  
-        return render_to_response('resetpwd.html', RequestContext(request, {'form': form,}))  
+        return render_to_response('autonumber/resetpwd.html', RequestContext(request, {'form': form,}))  
     else:  
         form = ChangepwdForm(request.POST)  
         if form.is_valid():  
@@ -34,6 +34,6 @@ def resetpwd(request):
                 return HttpResponseRedirect("/login/")
                 #return render_to_response('index.html', RequestContext(request,{'changepwd_success':True}))  
             else:  
-                return render_to_response('resetpwd.html', RequestContext(request, {'form': form,'oldpassword_is_wrong':True}))  
+                return render_to_response('autonumber/resetpwd.html', RequestContext(request, {'form': form,'oldpassword_is_wrong':True}))  
         else:  
-            return render_to_response('resetpwd.html', RequestContext(request, {'form': form,}))
+            return render_to_response('autonumber/resetpwd.html', RequestContext(request, {'form': form,}))

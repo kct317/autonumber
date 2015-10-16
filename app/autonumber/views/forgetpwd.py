@@ -19,7 +19,7 @@ from app.autonumber.form import ForgetPwdForm
 def forgetpwd(request):
     if request.method == 'GET':  
         form = ForgetPwdForm()  
-        return render_to_response('forgetpwd.html', RequestContext(request, {'form': form,}))
+        return render_to_response('autonumber/forgetpwd.html', RequestContext(request, {'form': form,}))
     else:  
         form = ForgetPwdForm(request.POST)  
         if form.is_valid():  
@@ -27,4 +27,4 @@ def forgetpwd(request):
             #将重置密码的特殊链接发邮箱
             return HttpResponseRedirect("/login/")
         else:  
-            return render_to_response('forgetpwd.html', RequestContext(request, {'form': form,}))
+            return render_to_response('autonumber/forgetpwd.html', RequestContext(request, {'form': form,}))
