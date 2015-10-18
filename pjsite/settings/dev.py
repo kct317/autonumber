@@ -104,7 +104,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', #数据库引擎
         'NAME': 'autonumber',                 #数据库名
         'USER': 'root',                       #用户名
-        'PASSWORD': 'donotuseroot!@#123',  #密码
+        'PASSWORD': 'comgointheworld!@#123',  #密码
         'HOST': '127.0.0.1',                  #数据库主机 默认为localhost
         'PORT': 3306,                         #数据库端口 MySQL默认为3306
     }
@@ -137,6 +137,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# app名字.model名字
+AUTH_USER_MODEL = 'autonumber.User'
 
 
 # Static files (CSS, JavaScript, Images)
