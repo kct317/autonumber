@@ -1,7 +1,7 @@
 # coding:utf-8
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import User, BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 """
 每个类都包含字段及相应的OP函数，
 然后在views.py直接调用
@@ -87,95 +87,6 @@ class UserLog(models.Model):
         return self.msg
 """
 
-class CaseProperty(models.Model):
-    caseproname      = models.CharField(max_length=128, default='') #案件性质类型名称
-    def __unicode__(self):
-        return self.caseproname
-
-class Case(models.Model):
-    caseid           = models.AutoField(primary_key=True)
-    casename         = models.CharField(max_length=128, default='') #案件名称
-    caseproperty     = models.ForeignKey(CaseProperty)              #案件性质/类型  下拉框
-    creater          = models.ForeignKey(User)                      #立案人
-
-    documentunit     = models.IntegerField(default=0) #文书所属单位
-    documenttype     = models.IntegerField(default=0) #文书类型
-
-    litigant         = models.CharField(max_length=30, default='') #当事人
-    litiganttype     = models.IntegerField(default=0)              #当事人类型
-
-    casevalue        = models.IntegerField(default=0) #案值/元
-    fines            = models.IntegerField(default=0) #罚款金额
-    forfeituremoney  = models.IntegerField(default=0) #没收金额
-
-    forfeitureitem   = models.CharField(max_length=128, default='') #没收物品
-    forfeitureamount = models.IntegerField(default='')              #没收数量
-
-    illegalfacts     = models.TextField(default='') #违法事实
-    law              = models.TextField(default='') #违反法律
-    punishbasis      = models.TextField(default='') #处罚依据
-
-    createdate       = models.DateTimeField(default=datetime.now()) #立案日期
-    informdate       = models.DateTimeField(default=datetime.now()) #告知日期
-
-    informnumber     = models.CharField(max_length=128, default='') #听证告知书/告知书编号  鹤工商告字 [2015] 00001号
-    issueddate       = models.DateTimeField(default=datetime.now()) #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
-    decisionnumber   = models.CharField(max_length=128, default='')  #行政处罚决定书编号   鹤工商处字 [2015] 00001号
-    handlingunit     = models.CharField(max_length=128, default='') #办案单位
-    auditorman       = models.CharField(max_length=30, default='') #核审人员（法制员）
-
-    remarkman        = models.TextField(default='') #案件备注
-
-    def __unicode__(self):
-        return self.casename
-
-class Manager(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=30, default='')
-    first_name = models.CharField(max_length=30, default='')
-    last_name = models.CharField(max_length=30, default='')
-    email = models.EmailField(max_length=70, default='')
-    def __unicode__(self):
-        return self.last_name + self.first_name
-
-class Dba(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=30, default='')
-    first_name = models.CharField(max_length=30, default='')
-    last_name = models.CharField(max_length=30, default='')
-    email = models.EmailField(max_length=70, default='')
-    def __unicode__(self):
-        return self.last_name + self.first_name
-
-class State(models.Model):
-    id = models.AutoField(primary_key=True)
-    statename = models.CharField(max_length=20, default='')
-    def __unicode__(self):
-        return self.statename
-
-class Database(models.Model):
-    id = models.AutoField(primary_key=True)
-    databasename = models.CharField(max_length=30, default='')
-    databaseip = models.CharField(max_length=30, default='')
-    def __unicode__(self):
-        return self.databasename + ' - ' + self.databaseip
-
-class Task(models.Model):
-    id = models.AutoField(primary_key=True)
-    creater = models.ForeignKey(User)
-    manager = models.ForeignKey(Manager)
-    dba = models.ForeignKey(Dba)
-    state = models.ForeignKey(State)
-    databases = models.ManyToManyField(Database)
-    sql = models.CharField(max_length=2000,blank=True,null=True)
-    desc = models.CharField(max_length=2000,blank=True, null=True)
-    createdtime = models.DateTimeField()
-    lastupdatedtime = models.DateTimeField(blank=True,null=True)
-    dbacomment = models.CharField(max_length=2000,blank=True,null=True)
-    attachment = models.FileField(upload_to='tasks',blank=True,null=True)
-    def __unicode__(self):
-        return str(self.id)
-
 
 class PermissionList(models.Model):
     name = models.CharField(max_length=64)
@@ -233,4 +144,101 @@ class User(AbstractBaseUser):
     def has_perm(self,perm,obj=None):
         if self.is_active and self.is_superuser:
             return True
+
+
+
+class CaseProperty(models.Model):
+    caseproname      = models.CharField(max_length=128, default='') #案件性质类型名称
+    def __unicode__(self):
+        return self.caseproname
+
+class Case(models.Model):
+    caseid           = models.AutoField(primary_key=True)
+    casename         = models.CharField(max_length=128, default='') #案件名称
+    caseproperty     = models.ForeignKey(CaseProperty)              #案件性质/类型  下拉框
+    casecreater      = models.CharField(max_length=128, default='') #立案人
+    creater          = models.ForeignKey(User)              #案件录入员
+
+    documentunit     = models.IntegerField(default=0) #文书所属单位
+    documenttype     = models.IntegerField(default=0) #文书类型
+
+    litigant         = models.CharField(max_length=30, default='') #当事人
+    litiganttype     = models.IntegerField(default=0)              #当事人类型
+
+    casevalue        = models.IntegerField(default=0) #案值/元
+    fines            = models.IntegerField(default=0) #罚款金额
+    forfeituremoney  = models.IntegerField(default=0) #没收金额
+
+    forfeitureitem   = models.CharField(max_length=128, default='') #没收物品
+    forfeitureamount = models.IntegerField(default='')              #没收数量
+
+    illegalfacts     = models.TextField(default='') #违法事实
+    law              = models.TextField(default='') #违反法律
+    punishbasis      = models.TextField(default='') #处罚依据
+
+    createdate       = models.DateTimeField(default=datetime.now()) #立案日期
+    informdate       = models.DateTimeField(default=datetime.now()) #告知日期
+
+    informnumber     = models.CharField(max_length=128, default='') #听证告知书/告知书编号  鹤工商告字 [2015] 00001号
+    issueddate       = models.DateTimeField(default=datetime.now()) #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
+    decisionnumber   = models.CharField(max_length=128, default='')  #行政处罚决定书编号   鹤工商处字 [2015] 00001号
+    handlingunit     = models.CharField(max_length=128, default='') #办案单位
+    auditorman       = models.CharField(max_length=30, default='') #核审人员（法制员）
+
+    remarkman        = models.TextField(default='') #案件备注
+
+    def __unicode__(self):
+        return self.casename
+
+
+'''
+class Manager(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=30, default='')
+    first_name = models.CharField(max_length=30, default='')
+    last_name = models.CharField(max_length=30, default='')
+    email = models.EmailField(max_length=70, default='')
+    def __unicode__(self):
+        return self.last_name + self.first_name
+
+class Dba(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=30, default='')
+    first_name = models.CharField(max_length=30, default='')
+    last_name = models.CharField(max_length=30, default='')
+    email = models.EmailField(max_length=70, default='')
+    def __unicode__(self):
+        return self.last_name + self.first_name
+
+class State(models.Model):
+    id = models.AutoField(primary_key=True)
+    statename = models.CharField(max_length=20, default='')
+    def __unicode__(self):
+        return self.statename
+
+class Database(models.Model):
+    id = models.AutoField(primary_key=True)
+    databasename = models.CharField(max_length=30, default='')
+    databaseip = models.CharField(max_length=30, default='')
+    def __unicode__(self):
+        return self.databasename + ' - ' + self.databaseip
+
+class Task(models.Model):
+    id = models.AutoField(primary_key=True)
+    creater = models.ForeignKey(User)
+    manager = models.ForeignKey(Manager)
+    dba = models.ForeignKey(Dba)
+    state = models.ForeignKey(State)
+    databases = models.ManyToManyField(Database)
+    sql = models.CharField(max_length=2000,blank=True,null=True)
+    desc = models.CharField(max_length=2000,blank=True, null=True)
+    createdtime = models.DateTimeField()
+    lastupdatedtime = models.DateTimeField(blank=True,null=True)
+    dbacomment = models.CharField(max_length=2000,blank=True,null=True)
+    attachment = models.FileField(upload_to='tasks',blank=True,null=True)
+    def __unicode__(self):
+        return str(self.id)
+'''
+
+
 
