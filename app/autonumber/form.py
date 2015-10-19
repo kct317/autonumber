@@ -5,12 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from app.autonumber.models import User,RoleList,PermissionList
-from app.autonumber.models import Manager, Database, CaseProperty
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
 from app.autonumber.config import CONFIG
 
-'''
-系统业务类
 '''
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -130,14 +127,14 @@ class RegisterForm(forms.Form):
         return cleaned_data
 
     def clean_username(self):
-        '''验证重复用户名'''
+        #验证重复用户名
         users = User.objects.filter(username__iexact=self.cleaned_data["username"])
         if not users:
             return self.cleaned_data["username"]
         raise forms.ValidationError(u"该用户名已经被使用请使用其他的昵称")
 
     def clean_email(self):
-        '''验证重复email'''
+        #验证重复email
         emails = User.objects.filter(email__iexact=self.cleaned_data["email"])
         if not emails:
             return self.cleaned_data["email"]
@@ -156,7 +153,7 @@ class ForgetPwdForm(forms.Form):
     )
 
     def clean_email(self):
-        '''验证重复email'''
+        #验证重复email
         emails = User.objects.filter(email__iexact=self.cleaned_data["email"])
         if emails:
             return self.cleaned_data["email"]
@@ -384,6 +381,7 @@ class CreateCaseForm(forms.Form):
         else:
             cleaned_data = super(CreatetaskForm, self).clean() 
         return cleaned_data
+'''
 
 
 '''
@@ -548,3 +546,9 @@ class PermissionListForm(forms.ModelForm):
         self.fields['name'].error_messages={'required':u'请输入名称'}
         self.fields['url'].label=u'URL'
         self.fields['url'].error_messages={'required':u'请输入URL'}
+
+
+'''
+系统业务类
+'''
+

@@ -6,12 +6,12 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response,RequestContext
 from django.contrib.auth.decorators import login_required
-from website.common.CommonPaginator import SelfPaginator
-from UserManage.views.permission import PermissionVerify
+from app.common.CommonPaginator import SelfPaginator
+from autonumber.views.permission import PermissionVerify
 
 from django.contrib import auth
 from django.contrib.auth import get_user_model
-from UserManage.forms import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm
+from autonumber.forms import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm
 
 def LoginUser(request):
     '''用户登录view'''
@@ -38,7 +38,7 @@ def LoginUser(request):
         'next':next,
     }
 
-    return render_to_response('UserManage/login.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/login.html',kwvars,RequestContext(request))
 
 @login_required
 def LogoutUser(request):
@@ -60,7 +60,7 @@ def ChangePassword(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/password.change.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/password.change.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -75,12 +75,11 @@ def ListUser(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/user.list.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/user.list.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def AddUser(request):
-
     if request.method=='POST':
         form = AddUserForm(request.POST)
         if form.is_valid():
@@ -97,7 +96,7 @@ def AddUser(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/user.add.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/user.add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -119,7 +118,7 @@ def EditUser(request,ID):
         'request':request,
     }
 
-    return render_to_response('UserManage/user.edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/user.edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -147,4 +146,4 @@ def ResetPassword(request,ID):
         'request':request,
     }
 
-    return render_to_response('UserManage/password.reset.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/password.reset.html',kwvars,RequestContext(request))

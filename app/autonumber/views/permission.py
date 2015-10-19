@@ -6,10 +6,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response,RequestContext
 from django.contrib.auth.decorators import login_required
-from website.common.CommonPaginator import SelfPaginator
-
-from UserManage.forms import PermissionListForm
-from UserManage.models import User,RoleList,PermissionList
+from app.common.CommonPaginator import SelfPaginator
+from app.autonumber.form import PermissionListForm
+from app.autonumber.models import User,RoleList,PermissionList
 
 def PermissionVerify():
     '''权限认证模块,
@@ -54,7 +53,7 @@ def NoPermission(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/permission.no.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/permission.no.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -87,7 +86,7 @@ def ListPermission(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/permission.list.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/permission.list.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -108,7 +107,7 @@ def EditPermission(request,ID):
         'request':request,
     }
 
-    return render_to_response('UserManage/permission.edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/permission.edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()

@@ -94,7 +94,7 @@ class PermissionList(models.Model):
 
     def __unicode__(self):
         return '%s(%s)' % (self.name,self.url)
-                                              
+
 class RoleList(models.Model):
     name = models.CharField(max_length=64)
     #permission = models.ManyToManyField(PermissionList,null=True,blank=True)
