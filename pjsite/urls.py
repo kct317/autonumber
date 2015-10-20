@@ -57,7 +57,7 @@ urlpatterns = [
 	url(r'^accounts/login/$', Home),
 
 	#app autonumber
-	url(r'^autonumber/$', include('app.autonumber.urls')),
+	url(r'^autonumber/', include('app.autonumber.urls')),
 
 	#static
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': settings.STATIC_ROOT,}),
