@@ -13,7 +13,7 @@
                                     {% for keyson, valueson in item.list.items %}
                                     <tr>
                                         <td>
-                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="#">{{keyson}}</a>
+                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href={% url "{{valueson}}" %}>{{keyson}}</a>
                                         </td>
                                     </tr>
                                     {% endfor %}
