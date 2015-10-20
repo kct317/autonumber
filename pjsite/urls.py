@@ -54,6 +54,7 @@ urlpatterns = [
 	#url(r'^templateview/$', autoviews.templateview), # http://127.0.0.1:8000/templateview/   使用缓存
 
 	url(r'^$',Home),
+	url(r'^accounts/login/$', Home),
 
 	#app autonumber
 	url(r'^autonumber/$', include('app.autonumber.urls')),

@@ -6,11 +6,11 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response,RequestContext
 from django.contrib.auth.decorators import login_required
-from website.common.CommonPaginator import SelfPaginator
-from UserManage.views.permission import PermissionVerify
+from app.common.CommonPaginator import SelfPaginator
+from app.autonumber.views.permission import PermissionVerify
 
-from UserManage.forms import RoleListForm
-from UserManage.models import RoleList
+from app.autonumber.form import RoleListForm
+from app.autonumber.models import RoleList
 
 @login_required
 @PermissionVerify()
@@ -28,7 +28,7 @@ def AddRole(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/role.add.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/role.add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -43,7 +43,7 @@ def ListRole(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/role.list.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/role.list.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -64,7 +64,7 @@ def EditRole(request,ID):
         'request':request,
     }
 
-    return render_to_response('UserManage/role.edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/role.edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()

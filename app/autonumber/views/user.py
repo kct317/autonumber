@@ -7,11 +7,11 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response,RequestContext
 from django.contrib.auth.decorators import login_required
 from app.common.CommonPaginator import SelfPaginator
-from autonumber.views.permission import PermissionVerify
+from app.autonumber.views.permission import PermissionVerify
 
 from django.contrib import auth
 from django.contrib.auth import get_user_model
-from autonumber.forms import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm
+from app.autonumber.form import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm
 
 def LoginUser(request):
     '''用户登录view'''

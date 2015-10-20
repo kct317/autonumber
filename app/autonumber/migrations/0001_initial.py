@@ -2,100 +2,82 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
+            name='User',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('password', models.CharField(verbose_name='password', max_length=128)),
+                ('last_login', models.DateTimeField(null=True, blank=True, verbose_name='last login')),
+                ('username', models.CharField(max_length=40, unique=True, db_index=True)),
+                ('email', models.EmailField(max_length=255)),
+                ('is_active', models.BooleanField(default=False)),
+                ('is_superuser', models.BooleanField(default=False)),
+                ('nickname', models.CharField(null=True, max_length=64)),
+                ('sex', models.CharField(null=True, max_length=2)),
+            ],
+            options={
+                'abstract': False,
+            },
+        ),
+        migrations.CreateModel(
             name='Case',
             fields=[
-                ('caseid', models.AutoField(primary_key=True, serialize=False)),
-                ('casename', models.CharField(max_length=128, default='')),
+                ('caseid', models.AutoField(serialize=False, primary_key=True)),
+                ('casename', models.CharField(default='', max_length=128)),
+                ('casecreater', models.CharField(default='', max_length=128)),
                 ('documentunit', models.IntegerField(default=0)),
                 ('documenttype', models.IntegerField(default=0)),
-                ('litigant', models.CharField(max_length=30, default='')),
+                ('litigant', models.CharField(default='', max_length=30)),
                 ('litiganttype', models.IntegerField(default=0)),
                 ('casevalue', models.IntegerField(default=0)),
                 ('fines', models.IntegerField(default=0)),
                 ('forfeituremoney', models.IntegerField(default=0)),
-                ('forfeitureitem', models.CharField(max_length=128, default='')),
+                ('forfeitureitem', models.CharField(default='', max_length=128)),
                 ('forfeitureamount', models.IntegerField(default='')),
                 ('illegalfacts', models.TextField(default='')),
                 ('law', models.TextField(default='')),
                 ('punishbasis', models.TextField(default='')),
-                ('createdate', models.IntegerField(default=0)),
-                ('informdate', models.IntegerField(default=0)),
-                ('informnumber', models.CharField(max_length=128, default='')),
-                ('issueddate', models.IntegerField(default=0)),
-                ('decisionnumber', models.CharField(max_length=128, default='')),
-                ('handlingunit', models.CharField(max_length=128, default='')),
-                ('auditorman', models.CharField(max_length=30, default='')),
+                ('createdate', models.DateTimeField(default=datetime.datetime(2015, 10, 20, 9, 18, 20, 252178))),
+                ('informdate', models.DateTimeField(default=datetime.datetime(2015, 10, 20, 9, 18, 20, 252178))),
+                ('informnumber', models.CharField(default='', max_length=128)),
+                ('issueddate', models.DateTimeField(default=datetime.datetime(2015, 10, 20, 9, 18, 20, 252178))),
+                ('decisionnumber', models.CharField(default='', max_length=128)),
+                ('handlingunit', models.CharField(default='', max_length=128)),
+                ('auditorman', models.CharField(default='', max_length=30)),
                 ('remarkman', models.TextField(default='')),
             ],
         ),
         migrations.CreateModel(
             name='CaseProperty',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
-                ('caseproname', models.CharField(max_length=128, default='')),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('caseproname', models.CharField(default='', max_length=128)),
             ],
         ),
         migrations.CreateModel(
-            name='Database',
+            name='PermissionList',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('databasename', models.CharField(max_length=30, default='')),
-                ('databaseip', models.CharField(max_length=30, default='')),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('name', models.CharField(max_length=64)),
+                ('url', models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Dba',
+            name='RoleList',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('username', models.CharField(max_length=30, default='')),
-                ('first_name', models.CharField(max_length=30, default='')),
-                ('last_name', models.CharField(max_length=30, default='')),
-                ('email', models.EmailField(max_length=70, default='')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Manager',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('username', models.CharField(max_length=30, default='')),
-                ('first_name', models.CharField(max_length=30, default='')),
-                ('last_name', models.CharField(max_length=30, default='')),
-                ('email', models.EmailField(max_length=70, default='')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='State',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('statename', models.CharField(max_length=20, default='')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Task',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('sql', models.CharField(max_length=2000, blank=True, null=True)),
-                ('desc', models.CharField(max_length=2000, blank=True, null=True)),
-                ('createdtime', models.DateTimeField()),
-                ('lastupdatedtime', models.DateTimeField(blank=True, null=True)),
-                ('dbacomment', models.CharField(max_length=2000, blank=True, null=True)),
-                ('attachment', models.FileField(blank=True, upload_to='tasks', null=True)),
-                ('creater', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-                ('databases', models.ManyToManyField(to='autonumber.Database')),
-                ('dba', models.ForeignKey(to='autonumber.Dba')),
-                ('manager', models.ForeignKey(to='autonumber.Manager')),
-                ('state', models.ForeignKey(to='autonumber.State')),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('name', models.CharField(max_length=64)),
+                ('permission', models.ManyToManyField(to='autonumber.PermissionList')),
             ],
         ),
         migrations.AddField(
@@ -107,5 +89,10 @@ class Migration(migrations.Migration):
             model_name='case',
             name='creater',
             field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+        ),
+        migrations.AddField(
+            model_name='user',
+            name='role',
+            field=models.ForeignKey(blank=True, to='autonumber.RoleList', null=True),
         ),
     ]
