@@ -26,6 +26,12 @@ urlpatterns = patterns('app.autonumber.views',
     url(r'^permission/list/$', 'permission.ListPermission', name='listpermissionurl'),
     url(r'^permission/edit/(?P<ID>\d+)/$', 'permission.EditPermission', name='editpermissionurl'),
     url(r'^permission/delete/(?P<ID>\d+)/$', 'permission.DeletePermission', name='deletepermissionurl'),
+
+
+    url(r'^index/add/(?P<idx>\d+)/$', 'user.AddUser', name='indexaddurl'),
+    url(r'^index/list/(?P<idx>\d+)/$', 'user.ListUser', name='indexlisturl'),
+    url(r'^index/edit/(?P<idx>\d+)/(?P<ID>\d+)/$', 'user.EditUser', name='indexediturl'),
+    url(r'^index/delete/(?P<idx>\d+)/(?P<ID>\d+)/$', 'user.DeleteUser', name='indexdeleteurl'),
 )
 
 '''
