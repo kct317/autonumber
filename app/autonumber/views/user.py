@@ -13,6 +13,7 @@ from django.contrib import auth
 from django.contrib.auth import get_user_model
 from app.autonumber.form import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm
 
+
 def LoginUser(request):
     '''用户登录view'''
     if request.user.is_authenticated():
