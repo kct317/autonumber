@@ -24,6 +24,7 @@ def LoginUser(request):
         next = request.GET['next']
     else:
         next = '/'
+    print(next)
 
     if request.method == "POST":
         form = LoginUserForm(request, data=request.POST)
