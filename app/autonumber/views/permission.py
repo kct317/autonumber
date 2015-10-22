@@ -53,7 +53,7 @@ def NoPermission(request):
         'request':request,
     }
 
-    return render_to_response('autonumber/permission.no.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/permission_no.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -71,7 +71,7 @@ def AddPermission(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/permission.add.html',kwvars,RequestContext(request))
+    return render_to_response('UserManage/permission_add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -86,7 +86,7 @@ def ListPermission(request):
         'request':request,
     }
 
-    return render_to_response('autonumber/permission.list.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/permission_list.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -107,7 +107,7 @@ def EditPermission(request,ID):
         'request':request,
     }
 
-    return render_to_response('autonumber/permission.edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/permission_edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()

@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
-
 from django.conf import settings
+
 from pjsite.views import Home
+from app.autonumber.views import user
 
 """
 配置方法
@@ -54,7 +55,7 @@ urlpatterns = [
 	#url(r'^templateview/$', autoviews.templateview), # http://127.0.0.1:8000/templateview/   使用缓存
 
 	url(r'^$',Home),
-	url(r'^accounts/login/$', Home),
+	url(r'^accounts/login/$', user.LoginUser),
 
 	#app autonumber
 	url(r'^autonumber/', include('app.autonumber.urls')),

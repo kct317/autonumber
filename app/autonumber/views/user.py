@@ -24,7 +24,6 @@ def LoginUser(request):
         next = request.GET['next']
     else:
         next = '/'
-    print(next)
 
     if request.method == "POST":
         form = LoginUserForm(request, data=request.POST)
@@ -62,7 +61,7 @@ def ChangePassword(request):
         'request':request,
     }
 
-    return render_to_response('autonumber/password.change.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/password_change.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -77,7 +76,7 @@ def ListUser(request):
         'request':request,
     }
 
-    return render_to_response('autonumber/user.list.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/user_list.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -98,7 +97,7 @@ def AddUser(request):
         'request':request,
     }
 
-    return render_to_response('autonumber/user.add.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/user_add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -120,7 +119,7 @@ def EditUser(request,ID):
         'request':request,
     }
 
-    return render_to_response('autonumber/user.edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/user_edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -148,4 +147,4 @@ def ResetPassword(request,ID):
         'request':request,
     }
 
-    return render_to_response('autonumber/password.reset.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/password_reset.html',kwvars,RequestContext(request))

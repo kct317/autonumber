@@ -1,26 +1,73 @@
             <div class="panel-group" id="accordion">
-                {% for item in config.left_panel %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" class="collapsed"><span class="glyphicon glyphicon-list-alt btn-xs"></span>{{item.name}}</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed"><span class="glyphicon glyphicon-list-alt btn-xs"></span>法规所</a>
                         </h4>
                     </div>
-                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse {% if '/' = request.path %} in {% endif %}">
+                    <div id="collapse1" class="panel-collapse collapse {% if '/' = request.path %} in {% endif %}">
                         <div class="panel-body">
-                            <table class="table">
-                                <tbody>
-                                    {% for keyson, valueson in item.list.items %}
-                                    <tr>
-                                        <td>
-                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="{% url {{valueson}} %}">{{keyson}}</a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                            <table class="table"><tbody>
+                                <tr><td>
+                                        <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="#">开工商告字</a>
+                                </td></tr>
+                                <tr><td>
+                                        <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="#">开工商听告字</a>
+                                </td></tr>
+                                <tr><td>
+                                        <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="#">开工商处字</a>
+                                </td></tr>
+                            </tbody></table>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="collapsed"><span class="glyphicon glyphicon-list-alt btn-xs"></span>kkkkkkk</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse {% if '/' = request.path %} in {% endif %}">
+                        <div class="panel-body">
+                            <table class="table"><tbody>
+                                <tr><td>
+                                        <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="#">aaaaa</a>
+                                </td></tr>
+                                <tr><td>
+                                        <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="#">bbbbb</a>
+                                </td></tr>
+                                <tr><td>
+                                        <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="#">ccccc</a>
+                                </td></tr>
+                            </tbody></table>
+                        </div>
+                    </div>
+                </div>
+
+                {% if user.is_superuser %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseEnd" class="collapsed"><span class="glyphicon glyphicon-list-alt btn-xs"></span>用户管理</a>
+                        </h4>
+                    </div>
+                    <div id="collapseEnd" class="panel-collapse collapse {% if 'user' in request.path or 'role' in request.path or 'permission' in request.path %} in {% endif %}">
+                        <div class="panel-body">
+                            <table class="table"><tbody>
+                                <tr><td>
+                                    <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href={% url "listuserurl" %}>用户管理</a>
+                                </td></tr>
+                                <tr><td>
+                                    <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href={% url "listroleurl" %}>角色管理</a>
+                                </td></tr>
+                                <tr><td>
+                                    <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href={% url "listpermissionurl" %}>权限管理</a>
+                                </td></tr>
+                            </tbody></table>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
             </div>

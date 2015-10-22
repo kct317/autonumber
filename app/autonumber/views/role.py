@@ -28,7 +28,7 @@ def AddRole(request):
         'request':request,
     }
 
-    return render_to_response('autonumber/role.add.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/role_add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -43,7 +43,7 @@ def ListRole(request):
         'request':request,
     }
 
-    return render_to_response('autonumber/role.list.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/role_list.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
@@ -64,7 +64,7 @@ def EditRole(request,ID):
         'request':request,
     }
 
-    return render_to_response('autonumber/role.edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/role_edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()

@@ -1,7 +1,7 @@
 # coding:utf-8
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 """
 每个类都包含字段及相应的OP函数，
 然后在views.py直接调用
