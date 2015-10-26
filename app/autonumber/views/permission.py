@@ -71,7 +71,7 @@ def AddPermission(request):
         'request':request,
     }
 
-    return render_to_response('UserManage/permission_add.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/permission_add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
