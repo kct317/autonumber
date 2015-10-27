@@ -8,6 +8,8 @@
         
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
         
         {% block head %}{% endblock %}
         <style type="text/css">
@@ -97,11 +99,6 @@
             <p align="center">&copy;2015  Powered by: <a href="#">{{config.sysname}}</a></p>
             {% endblock %}
         </div>
-
-        <!-- 加速页面显示 -->
-        <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
 
     </body>
 </html>

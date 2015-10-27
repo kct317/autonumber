@@ -93,7 +93,7 @@ class PermissionList(models.Model):
     url = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return '%s(%s)' % (self.name,self.url)
+        return ('%s(%s)' % (self.name, self.url))
 
 class RoleList(models.Model):
     name = models.CharField(max_length=64)
@@ -176,11 +176,11 @@ class Case(models.Model):
     law              = models.TextField(default='') #违反法律
     punishbasis      = models.TextField(default='') #处罚依据
 
-    createdate       = models.DateTimeField(default=datetime.now()) #立案日期
-    informdate       = models.DateTimeField(default=datetime.now()) #告知日期
+    createdate       = models.DateTimeField(default=datetime.now) #立案日期
+    informdate       = models.DateTimeField(default=datetime.now) #告知日期
 
     informnumber     = models.CharField(max_length=128, default='') #听证告知书/告知书编号  鹤工商告字 [2015] 00001号
-    issueddate       = models.DateTimeField(default=datetime.now()) #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
+    issueddate       = models.DateTimeField(default=datetime.now) #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
     decisionnumber   = models.CharField(max_length=128, default='')  #行政处罚决定书编号   鹤工商处字 [2015] 00001号
     handlingunit     = models.CharField(max_length=128, default='') #办案单位
     auditorman       = models.CharField(max_length=30, default='') #核审人员（法制员）

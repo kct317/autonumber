@@ -4,9 +4,10 @@
     Add Role
 {% endblock %}
 
+{% load staticfiles %}
 {% block head %}
-    <script src="/static/js/jquery.bootstrap-duallistbox.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-duallistbox.css">
+    <script src="{% static 'js/jquery.bootstrap-duallistbox.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap-duallistbox.css' %}">
 {% endblock %}
 
 {% block content %}
