@@ -7,19 +7,19 @@ from django.contrib.auth.decorators import login_required
 from app.common.CommonPaginator import SelfPaginator
 from app.autonumber.views.permission import PermissionVerify
 
-from app.autonumber.form import RoleListForm
-from app.autonumber.models import case
+from app.autonumber.form import CaseForm
+from app.autonumber.models import Case
 
 @login_required
 @PermissionVerify()
-def AddGaoZi(request):
+def AddGaoZi(request, type):
     if request.method == "POST":
-        form = RoleListForm(request.POST)
+        form = CaseForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('listroleurl'))
     else:
-        form = RoleListForm()
+        form = CaseForm()
 
     kwvars = {
         'form':form,
@@ -30,8 +30,8 @@ def AddGaoZi(request):
 
 @login_required
 @PermissionVerify()
-def ListGaoZi(request):
-    mList = RoleList.objects.all()
+def ListGaoZi(request, type):
+    mList = Case.objects.all()
 
     #分页功能
     lst = SelfPaginator(request,mList, 20)
@@ -45,16 +45,16 @@ def ListGaoZi(request):
 
 @login_required
 @PermissionVerify()
-def EditGaoZi(request,ID):
+def EditGaoZi(request, type, ID):
     iRole = RoleList.objects.get(id=ID)
 
     if request.method == "POST":
-        form = RoleListForm(request.POST,instance=iRole)
+        form = CaseForm(request.POST,instance=iRole)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('listroleurl'))
     else:
-        form = RoleListForm(instance=iRole)
+        form = CaseForm(instance=iRole)
 
     kwvars = {
         'ID':ID,
@@ -66,7 +66,7 @@ def EditGaoZi(request,ID):
 
 @login_required
 @PermissionVerify()
-def DeleteGaoZi(request,ID):
-    RoleList.objects.filter(id = ID).delete()
+def DeleteGaoZi(request, type, ID):
+    Case.objects.filter(id = ID).delete()
 
     return HttpResponseRedirect(reverse('listroleurl'))

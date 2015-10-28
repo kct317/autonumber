@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import get_user_model
-from app.autonumber.models import User,RoleList,PermissionList
+from app.autonumber.models import User,RoleList,PermissionList,Case
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
 from app.autonumber.config import CONFIG
 
