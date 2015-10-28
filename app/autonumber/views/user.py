@@ -28,7 +28,7 @@ def LoginUser(request):
     if request.method == "POST":
         form = LoginUserForm(request, data=request.POST)
         if form.is_valid():
-            auth.login(request, form.get_user())
+            auth.login(request, form.get_user())   #将user_id user_backend存储到request的session，然后将这个session的存储到数据库表/缓存/文件系统
             return HttpResponseRedirect(request.POST['next'])
     else:
         form = LoginUserForm(request)

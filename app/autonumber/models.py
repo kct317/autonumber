@@ -92,7 +92,7 @@ class PermissionList(models.Model):
     name = models.CharField(max_length=64)
     url = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return ('%s(%s)' % (self.name, self.url))
 
 class RoleList(models.Model):
@@ -100,7 +100,7 @@ class RoleList(models.Model):
     #permission = models.ManyToManyField(PermissionList,null=True,blank=True)
     permission = models.ManyToManyField(PermissionList)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class UserManager(BaseUserManager):
@@ -149,7 +149,7 @@ class User(AbstractBaseUser):
 
 class CaseProperty(models.Model):
     caseproname      = models.CharField(max_length=128, default='') #案件性质类型名称
-    def __unicode__(self):
+    def __str__(self):
         return self.caseproname
 
 class Case(models.Model):
@@ -180,14 +180,14 @@ class Case(models.Model):
     informdate       = models.DateTimeField(default=datetime.now) #告知日期
 
     informnumber     = models.CharField(max_length=128, default='') #听证告知书/告知书编号  鹤工商告字 [2015] 00001号
-    issueddate       = models.DateTimeField(default=datetime.now) #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
-    decisionnumber   = models.CharField(max_length=128, default='')  #行政处罚决定书编号   鹤工商处字 [2015] 00001号
+    issueddate       = models.DateTimeField(default=datetime.now)   #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
+    decisionnumber   = models.CharField(max_length=128, default='') #行政处罚决定书编号   鹤工商处字 [2015] 00001号
     handlingunit     = models.CharField(max_length=128, default='') #办案单位
-    auditorman       = models.CharField(max_length=30, default='') #核审人员（法制员）
+    auditorman       = models.CharField(max_length=30, default='')  #核审人员（法制员）
 
     remarkman        = models.TextField(default='') #案件备注
 
-    def __unicode__(self):
+    def __str__(self):
         return self.casename
 
 

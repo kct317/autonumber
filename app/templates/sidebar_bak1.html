@@ -6,7 +6,7 @@
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" class="collapsed"><span class="glyphicon glyphicon-list-alt btn-xs"></span>{{item.name}}</a>
                         </h4>
                     </div>
-                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse {% if '{{item.index}}/ListGaoZi' = request.path or '{{item.index}}/ListGaoTingZi' = request.path or '{{item.index}}/ListChuZi' = request.path%} in {% endif %}">
+                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse {% if '/' = request.path %} in {% endif %}">
                         <div class="panel-body">
                             <table class="table">
                                 <tbody>

@@ -28,10 +28,21 @@ urlpatterns = patterns('app.autonumber.views',
     url(r'^permission/delete/(?P<ID>\d+)/$', 'permission.DeletePermission', name='deletepermissionurl'),
 
 
-    url(r'^index/add/(?P<idx>\d+)/$', 'user.AddUser', name='indexaddurl'),
-    url(r'^index/list/(?P<idx>\d+)/$', 'user.ListUser', name='indexlisturl'),
-    url(r'^index/edit/(?P<idx>\d+)/(?P<ID>\d+)/$', 'user.EditUser', name='indexediturl'),
-    url(r'^index/delete/(?P<idx>\d+)/(?P<ID>\d+)/$', 'user.DeleteUser', name='indexdeleteurl'),
+    url(r'^(?P<type>\d+)/gaozi/add/$', 'autonumber.AddGaoZi', name='AddGaoZi'),
+    url(r'^(?P<type>\d+)/gaozi/list/$', 'autonumber.ListGaoZi', name='ListGaoZi'),
+    url(r'^(?P<type>\d+)/gaozi/edit/(?P<ID>\d+)/$', 'autonumber.EditGaoZi', name='EditGaoZi'),
+    url(r'^(?P<type>\d+)/gaozi/delete/(?P<ID>\d+)/$', 'autonumber.DeleteGaoZi', name='DeleteGaoZi'),
+    #--------------------------------------------------------------------------------
+    url(r'^(?P<type>\d+)/gaotingzi/add/$', 'autonumber.AddGaoTingZi', name='AddGaoTingZi'),
+    url(r'^(?P<type>\d+)/gaotingzi/list/$', 'autonumber.ListGaoTingZi', name='ListGaoTingZi'),
+    url(r'^(?P<type>\d+)/gaotingzi/edit/(?P<ID>\d+)/$', 'autonumber.EditGaoTingZi', name='EditGaoTingZi'),
+    url(r'^(?P<type>\d+)/gaotingzi/delete/(?P<ID>\d+)/$', 'autonumber.DeleteGaoTingZi', name='DeleteGaoTingZi'),
+    #--------------------------------------------------------------------------------
+    url(r'^(?P<type>\d+)/chuzi/add/$', 'autonumber.AddChuZi', name='AddChuZi'),
+    url(r'^(?P<type>\d+)/chuzi/list/$', 'autonumber.ListChuZi', name='ListChuZi'),
+    url(r'^(?P<type>\d+)/chuzi/edit/(?P<ID>\d+)/$', 'autonumber.EditChuZi', name='EditChuZi'),
+    url(r'^(?P<type>\d+)/chuzi/delete/(?P<ID>\d+)/$', 'autonumber.DeleteChuZi', name='DeleteChuZi'),
+
 )
 
 '''

@@ -551,4 +551,52 @@ class PermissionListForm(forms.ModelForm):
 '''
 系统业务类
 '''
+class CaseForm(forms.ModelForm):
+    class Meta:
+        model = Case
+        fields = ('casename','caseproperty','casecreater','documentunit','documenttype',
+                  'litigant','litiganttype','casevalue','fines','forfeituremoney',
+                  'forfeitureitem','forfeitureamount','illegalfacts','law','punishbasis',
+                  'createdate','informdate','informnumber','issueddate','decisionnumber',
+                  'handlingunit','auditorman','remarkman')
+        widgets = {
+            'casename' : forms.TextInput(attrs={'class':'form-control'}),
+            'caseproperty' : forms.Select(attrs={'class':'form-control'}),
+            'casecreater' : forms.TextInput(attrs={'class':'form-control'}),
+            'creater' : forms.Select(attrs={'class':'form-control'}),
 
+            'documentunit' : forms.TextInput(attrs={'class':'form-control'}),
+            'documenttype' : forms.TextInput(attrs={'class':'form-control'}),
+
+            'litigant' : forms.TextInput(attrs={'class':'form-control'}),
+            'litiganttype' : forms.TextInput(attrs={'class':'form-control'}),
+
+            'casevalue' : forms.TextInput(attrs={'class':'form-control'}),
+            'fines' : forms.TextInput(attrs={'class':'form-control'}),
+            'forfeituremoney' : forms.TextInput(attrs={'class':'form-control'}),
+
+            'forfeitureitem' : forms.TextInput(attrs={'class':'form-control'}),
+            'forfeitureamount' : forms.TextInput(attrs={'class':'form-control'}),
+
+            'illegalfacts' : forms.TextInput(attrs={'class':'form-control'}),
+            'law' : forms.TextInput(attrs={'class':'form-control'}),
+            'punishbasis' : forms.TextInput(attrs={'class':'form-control'}),
+
+            'createdate' : forms.TextInput(attrs={'class':'form-control'}),
+            'informdate' : forms.TextInput(attrs={'class':'form-control'}),
+
+            'informnumber' : forms.TextInput(attrs={'class':'form-control'}),
+            'issueddate' : forms.TextInput(attrs={'class':'form-control'}),
+            'decisionnumber' : forms.TextInput(attrs={'class':'form-control'}),
+            'handlingunit' : forms.TextInput(attrs={'class':'form-control'}),
+            'auditorman' : forms.TextInput(attrs={'class':'form-control'}),
+
+            'remarkman' : forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+    def __init__(self,*args,**kwargs):
+        super(PermissionListForm,self).__init__(*args,**kwargs)
+        self.fields['name'].label=u'名 称'
+        self.fields['name'].error_messages={'required':u'请输入名称'}
+        self.fields['url'].label=u'URL'
+        self.fields['url'].error_messages={'required':u'请输入URL'}

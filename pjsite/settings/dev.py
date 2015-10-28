@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions',  #创建数据库表django_session
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     process_exception
 """
 MIDDLEWARE_CLASSES = [
-    'django.contrib.sessions.middleware.SessionMiddleware', #使用会话
+    'django.contrib.sessions.middleware.SessionMiddleware', #使用会话, 然后可以使用3种模式：存储到数据库，缓存，文件系统   http://blog.csdn.net/clh604/article/details/9186465
     'django.middleware.common.CommonMiddleware', #
     'django.middleware.csrf.CsrfViewMiddleware', #防止csrf攻击
     'django.contrib.auth.middleware.AuthenticationMiddleware', #认证
@@ -155,3 +155,5 @@ STATICFILES_DIRS = (
     STATIC_URL
 )
 
+SESSION_COOKIE_AGE=60*1   #设置服务器端会话的有效期
+SESSION_EXPIRE_AT_BROWSER_CLOSE=False  #会话cookie可以在用户浏览器中保持有效期。True：关闭浏览器，则Cookie失效。
