@@ -155,5 +155,5 @@ STATICFILES_DIRS = (
     STATIC_URL
 )
 
-SESSION_COOKIE_AGE=60*1   #设置服务器端会话的有效期
+SESSION_COOKIE_AGE=60*30   #设置服务器端会话的有效期
 SESSION_EXPIRE_AT_BROWSER_CLOSE=False  #会话cookie可以在用户浏览器中保持有效期。True：关闭浏览器，则Cookie失效。

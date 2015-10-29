@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    GaoZi List
+{% endblock %}
+
+{% block content %}
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            {% url "AddGaoZi" type as theaddgaoziurl %}
+            <a class="btn btn-default {%if request.path = theaddgaoziurl%} active {%endif%}" href={{ theaddgaoziurl }}><span class="glyphicon glyphicon-edit"></span>新建告字</a>
+            {% url "ListGaoZi" type as thelistgaoziurl %}
+            <a class="btn btn-default {%if request.path = thelistgaoziurl%} active {%endif%}" href={{ thelistgaoziurl }}><span class="glyphicon glyphicon-list"></span>告字列表</a>
+        </div>
+    </div>
+
+    <hr/>
+
+    <table class="table table-hover table-striped  table-bordered table-condensed">
+        <tr>
+            <th>id</th>
+            <th>文书号</th>
+            <th>承办单位</th>
+            <th>当事人</th>
+            <th>决定书</th>
+            <th>操作</th>
+        </tr>
+
+        {% for i in lPage %}
+            <tr style="font-size: 13px;">
+                <td>{{ i.id }}</td>
+                <td>{{ i.informnumber }}</td>
+                <td>{{ i.litigant }}</td>
+                <td>{{ i.decisionnumber }}</td>
+
+                <td class="host_buttom">
+                        <a class="btn btn-warning btn-xs"  href={% url "EditGaoZi" type i.id %} onclick="return confirm('是否确认编辑？')">编辑</a>
+                        <a class="btn btn-danger btn-xs" href={% url "DeleteGaoZi" type i.id %} onclick="return confirm('是否确认删除？')">删除</a>
+                    </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    {% include "common/paginator.html" %}
+{% endblock %}

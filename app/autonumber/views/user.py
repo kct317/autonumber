@@ -12,7 +12,7 @@ from app.autonumber.views.permission import PermissionVerify
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from app.autonumber.form import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm
-
+from app.autonumber.config import CONFIG
 
 def LoginUser(request):
     '''用户登录view'''
@@ -74,6 +74,7 @@ def ListUser(request):
     kwvars = {
         'lPage':lst,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/user_list.html',kwvars,RequestContext(request))
@@ -95,6 +96,7 @@ def AddUser(request):
     kwvars = {
         'form':form,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/user_add.html',kwvars,RequestContext(request))
@@ -117,6 +119,7 @@ def EditUser(request,ID):
         'ID':ID,
         'form':form,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/user_edit.html',kwvars,RequestContext(request))

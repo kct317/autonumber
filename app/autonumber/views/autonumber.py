@@ -9,6 +9,9 @@ from app.autonumber.views.permission import PermissionVerify
 
 from app.autonumber.form import CaseForm
 from app.autonumber.models import Case
+from app.autonumber.config import CONFIG
+
+#--------------------------告字---------------------------
 
 @login_required
 @PermissionVerify()
@@ -17,20 +20,89 @@ def AddGaoZi(request, type):
         form = CaseForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('listroleurl'))
+            return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
     else:
         form = CaseForm()
 
     kwvars = {
         'form':form,
         'request':request,
+        'type':type,
+        'config':CONFIG,
     }
 
-    return render_to_response('autonumber/role_add.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/gaozi_add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def ListGaoZi(request, type):
+    mList = Case.objects.all()
+
+    #分页功能
+    lst = SelfPaginator(request, mList, 20)
+
+    kwvars = {
+        'lPage':lst,
+        'request':request,
+        'type':type,
+        'config':CONFIG,
+    }
+
+    return render_to_response('autonumber/gaozi_list.html',kwvars,RequestContext(request))
+
+@login_required
+@PermissionVerify()
+def EditGaoZi(request, type, ID):
+    iRole = Case.objects.get(id=ID)
+
+    if request.method == "POST":
+        form = CaseForm(request.POST,instance=iRole)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('listroleurl'))
+    else:
+        form = CaseForm(instance=iRole)
+
+    kwvars = {
+        'ID':ID,
+        'form':form,
+        'request':request,
+        'config':CONFIG,
+    }
+
+    return render_to_response('autonumber/role_edit.html',kwvars,RequestContext(request))
+
+@login_required
+@PermissionVerify()
+def DeleteGaoZi(request, type, ID):
+    Case.objects.filter(id = ID).delete()
+
+    return HttpResponseRedirect(reverse('listroleurl'))
+
+#---------------------------听告字-------------------------
+
+@login_required
+@PermissionVerify()
+def AddTingGaoZi(request, type):
+    if request.method == "POST":
+        form = CaseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
+    else:
+        form = CaseForm()
+
+    kwvars = {
+        'form':form,
+        'request':request,
+        'type':type
+    }
+
+    return render_to_response('autonumber/gaozi_add.html',kwvars,RequestContext(request))
+
+@login_required
+@PermissionVerify()
+def ListTingGaoZi(request, type):
     mList = Case.objects.all()
 
     #分页功能
@@ -45,7 +117,7 @@ def ListGaoZi(request, type):
 
 @login_required
 @PermissionVerify()
-def EditGaoZi(request, type, ID):
+def EditTingGaoZi(request, type, ID):
     iRole = RoleList.objects.get(id=ID)
 
     if request.method == "POST":
@@ -66,7 +138,71 @@ def EditGaoZi(request, type, ID):
 
 @login_required
 @PermissionVerify()
-def DeleteGaoZi(request, type, ID):
+def DeleteTingGaoZi(request, type, ID):
+    Case.objects.filter(id = ID).delete()
+
+    return HttpResponseRedirect(reverse('listroleurl'))
+
+#---------------------------处字--------------------------
+
+@login_required
+@PermissionVerify()
+def AddChuZi(request, type):
+    if request.method == "POST":
+        form = CaseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
+    else:
+        form = CaseForm()
+
+    kwvars = {
+        'form':form,
+        'request':request,
+        'type':type
+    }
+
+    return render_to_response('autonumber/gaozi_add.html',kwvars,RequestContext(request))
+
+@login_required
+@PermissionVerify()
+def ListChuZi(request, type):
+    mList = Case.objects.all()
+
+    #分页功能
+    lst = SelfPaginator(request,mList, 20)
+
+    kwvars = {
+        'lPage':lst,
+        'request':request,
+    }
+
+    return render_to_response('autonumber/role_list.html',kwvars,RequestContext(request))
+
+@login_required
+@PermissionVerify()
+def EditChuZi(request, type, ID):
+    iRole = RoleList.objects.get(id=ID)
+
+    if request.method == "POST":
+        form = CaseForm(request.POST,instance=iRole)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('listroleurl'))
+    else:
+        form = CaseForm(instance=iRole)
+
+    kwvars = {
+        'ID':ID,
+        'form':form,
+        'request':request,
+    }
+
+    return render_to_response('autonumber/role_edit.html',kwvars,RequestContext(request))
+
+@login_required
+@PermissionVerify()
+def DeleteChuZi(request, type, ID):
     Case.objects.filter(id = ID).delete()
 
     return HttpResponseRedirect(reverse('listroleurl'))

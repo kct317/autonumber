@@ -595,8 +595,59 @@ class CaseForm(forms.ModelForm):
         }
 
     def __init__(self,*args,**kwargs):
-        super(PermissionListForm,self).__init__(*args,**kwargs)
-        self.fields['name'].label=u'名 称'
-        self.fields['name'].error_messages={'required':u'请输入名称'}
-        self.fields['url'].label=u'URL'
-        self.fields['url'].error_messages={'required':u'请输入URL'}
+        super(CaseForm,self).__init__(*args,**kwargs)
+        self.fields['casename'].label=u'案件名称'
+        self.fields['casename'].error_messages={'required':u'请输入案件名称'}
+        self.fields['caseproperty'].label=u'案件性质'
+        self.fields['caseproperty'].error_messages={'required':u'请选择案件性质'}
+        self.fields['casecreater'].label=u'案件录入员'
+        self.fields['casecreater'].required=False
+
+        self.fields['documentunit'].label=u'文书所属单位'
+        self.fields['documentunit'].required=False
+        self.fields['documenttype'].label=u'文书类型'
+        self.fields['documenttype'].required=False
+
+        self.fields['litigant'].label=u'当事人'
+        self.fields['litigant'].required=False
+        self.fields['litiganttype'].label=u'当事人类型'
+        self.fields['litiganttype'].required=False
+
+        self.fields['casevalue'].label=u'案值/元'
+        self.fields['casevalue'].required=False
+        self.fields['fines'].label=u'罚款金额'
+        self.fields['fines'].required=False
+        self.fields['forfeituremoney'].label=u'没收金额'
+        self.fields['forfeituremoney'].required=False
+
+        self.fields['forfeitureitem'].label=u'没收物品'
+        self.fields['forfeitureitem'].required=False
+        self.fields['forfeitureamount'].label=u'没收数量'
+        self.fields['forfeitureamount'].required=False
+
+        self.fields['illegalfacts'].label=u'违法事实'
+        self.fields['illegalfacts'].required=False
+        self.fields['law'].label=u'违反法律'
+        self.fields['law'].required=False
+        self.fields['punishbasis'].label=u'处罚依据'
+        self.fields['punishbasis'].required=False
+
+        self.fields['createdate'].label=u'立案日期'
+        self.fields['createdate'].required=False
+        self.fields['informdate'].label=u'告知日期'
+        self.fields['informdate'].required=False
+
+        self.fields['informnumber'].label=u'听证告知书'
+        self.fields['informnumber'].required=False
+        self.fields['issueddate'].label=u'处罚决定书发文日期'
+        self.fields['issueddate'].required=False
+        self.fields['decisionnumber'].label=u'行政处罚决定书编号'
+        self.fields['decisionnumber'].required=False
+        
+        self.fields['handlingunit'].label=u'办案单位'
+        self.fields['handlingunit'].required=False
+        self.fields['auditorman'].label=u'核审人员（法制员）'
+        self.fields['auditorman'].required=False
+
+        self.fields['remarkman'].label=u'案件备注'
+        self.fields['remarkman'].required=False

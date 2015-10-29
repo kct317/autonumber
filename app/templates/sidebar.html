@@ -6,25 +6,28 @@
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" class="collapsed"><span class="glyphicon glyphicon-list-alt btn-xs"></span>{{item.name}}</a>
                         </h4>
                     </div>
-                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse {% if '{{item.index}}/ListGaoZi' = request.path or '{{item.index}}/ListGaoTingZi' = request.path or '{{item.index}}/ListChuZi' = request.path%} in {% endif %}">
+                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse {% if '{{item.index}}/ListGaoZi' = request.path or '{{item.index}}/ListTingGaoZi' = request.path or '{{item.index}}/ListChuZi' = request.path%} in {% endif %}">
                         <div class="panel-body">
                             <table class="table">
                                 <tbody>
-                                    {% if '1' = {{item.flag[0]}} %}
+                                    {% ifequal 1 item.flag.0 %}
+                                    {% url 'ListGaoZi' item.index as thelistgaoziurl %}
                                     <tr><td>
-                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="{% url 'ListGaoZi' {{item.index}} %}">开工商告字</a>
+                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href={{thelistgaoziurl}}>开工商告字</a>
                                     </td></tr>
-                                    {% endif %}
-                                    {% if '1' = {{item.flag[1]}} %}
+                                    {% endifequal %}
+                                    {% ifequal 1 item.flag.1 %}
+                                    {% url 'ListTingGaoZi' item.index as thelisttinggaoziurl %}
                                     <tr><td>
-                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="{% url 'ListGaoTingZi' {{item.index}} %}">开工商听告字</a>
+                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href={{thelisttinggaoziurl}}>开工商听告字</a>
                                     </td></tr>
-                                    {% endif %}
-                                    {% if '1' = {{item.flag[2]}} %}
+                                    {% endifequal %}
+                                    {% ifequal 1 item.flag.2 %}
+                                    {% url 'ListChuZi' item.index as thelistchuziurl %}
                                     <tr><td>
-                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href="{% url 'ListChuZi' {{item.index}} %}">开工商处字</a>
+                                            <span class="glyphicon glyphicon-tree-conifer btn-xs"></span><a href={{thelistchuziurl}}>开工商处字</a>
                                     </td></tr>
-                                    {% endif %}
+                                    {% endifequal %}
                                 </tbody>
                             </table>
                         </div>

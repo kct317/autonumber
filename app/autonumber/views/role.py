@@ -11,6 +11,7 @@ from app.autonumber.views.permission import PermissionVerify
 
 from app.autonumber.form import RoleListForm
 from app.autonumber.models import RoleList
+from app.autonumber.config import CONFIG
 
 @login_required
 @PermissionVerify()
@@ -26,6 +27,7 @@ def AddRole(request):
     kwvars = {
         'form':form,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/role_add.html',kwvars,RequestContext(request))
@@ -41,6 +43,7 @@ def ListRole(request):
     kwvars = {
         'lPage':lst,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/role_list.html',kwvars,RequestContext(request))
@@ -62,6 +65,7 @@ def EditRole(request,ID):
         'ID':ID,
         'form':form,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/role_edit.html',kwvars,RequestContext(request))

@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from app.common.CommonPaginator import SelfPaginator
 from app.autonumber.form import PermissionListForm
 from app.autonumber.models import User,RoleList,PermissionList
+from app.autonumber.config import CONFIG
 
 def PermissionVerify():
     '''权限认证模块,
@@ -69,6 +70,7 @@ def AddPermission(request):
     kwvars = {
         'form':form,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/permission_add.html',kwvars,RequestContext(request))
@@ -84,6 +86,7 @@ def ListPermission(request):
     kwvars = {
         'lPage':lst,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/permission_list.html',kwvars,RequestContext(request))
@@ -105,6 +108,7 @@ def EditPermission(request,ID):
         'ID':ID,
         'form':form,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/permission_edit.html',kwvars,RequestContext(request))
