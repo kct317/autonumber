@@ -20,7 +20,8 @@ def PermissionVerify():
         def _wrapped_view(request, *args, **kwargs):
             iUser = User.objects.get(username=request.user)
 
-            if not iUser.is_superuser: #判断用户如果是超级管理员则具有所有权限
+            #if not iUser.is_superuser: #判断用户如果是超级管理员则具有所有权限
+            if not iUser.is_active: #判断用户是否正常
                 if not iUser.role: #如果用户无角色，直接返回无权限
                     return HttpResponseRedirect(reverse('permissiondenyurl'))
 
@@ -40,7 +41,9 @@ def PermissionVerify():
                 if len(matchUrl) == 0:
                     return HttpResponseRedirect(reverse('permissiondenyurl'))
             else:
-                pass
+                if not iUser.is_superuser:
+                    if 'user' in request.path or 'role' in request.path or 'permission' in request.path:
+                        return HttpResponseRedirect(reverse('permissiondenyurl'))
 
             return view_func(request, *args, **kwargs)
         return _wrapped_view
@@ -52,6 +55,7 @@ def NoPermission(request):
 
     kwvars = {
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/permission_no.html',kwvars,RequestContext(request))

@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response,RequestContext
 from django.contrib.auth.decorators import login_required
 from app.common.CommonPaginator import SelfPaginator
 from app.autonumber.views.permission import PermissionVerify
+from django.contrib.auth import get_user_model
 
 from app.autonumber.form import CaseForm
 from app.autonumber.models import Case
@@ -19,11 +20,16 @@ def AddGaoZi(request, type):
     if request.method == "POST":
         form = CaseForm(request.POST)
         if form.is_valid():
-            form.save()
+            osc = form.save(commit=False)
+            osc.creater = request.user
+            index = int(type) - 1
+            osc.documentunit = CONFIG['left_panel'][index]['index']
+            osc.documenttype = '1'
+            osc.save()
             return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
     else:
         form = CaseForm()
-
+    
     kwvars = {
         'form':form,
         'request':request,
@@ -36,7 +42,8 @@ def AddGaoZi(request, type):
 @login_required
 @PermissionVerify()
 def ListGaoZi(request, type):
-    mList = Case.objects.all()
+    index = int(type) - 1
+    mList = Case.objects.filter(documenttype='1', documentunit=CONFIG['left_panel'][index]['index'])
 
     #分页功能
     lst = SelfPaginator(request, mList, 20)
@@ -53,31 +60,36 @@ def ListGaoZi(request, type):
 @login_required
 @PermissionVerify()
 def EditGaoZi(request, type, ID):
-    iRole = Case.objects.get(id=ID)
+    iGaozi = Case.objects.get(id=ID)
 
     if request.method == "POST":
-        form = CaseForm(request.POST,instance=iRole)
+        form = CaseForm(request.POST,instance=iGaozi)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('listroleurl'))
+            return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
     else:
-        form = CaseForm(instance=iRole)
+        form = CaseForm(instance=iGaozi)
 
     kwvars = {
         'ID':ID,
         'form':form,
         'request':request,
+        'type':type,
         'config':CONFIG,
     }
 
-    return render_to_response('autonumber/role_edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/gaozi_edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def DeleteGaoZi(request, type, ID):
     Case.objects.filter(id = ID).delete()
 
-    return HttpResponseRedirect(reverse('listroleurl'))
+    return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
+
+
+
+
 
 #---------------------------听告字-------------------------
 
@@ -87,61 +99,76 @@ def AddTingGaoZi(request, type):
     if request.method == "POST":
         form = CaseForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
+            osc = form.save(commit=False)
+            osc.creater = request.user
+            index = int(type) - 1
+            osc.documentunit = CONFIG['left_panel'][index]['index']
+            osc.documenttype = '2'
+            osc.save()
+            return HttpResponseRedirect(reverse('ListTingGaoZi', args=(type,)))
     else:
         form = CaseForm()
-
+    
     kwvars = {
         'form':form,
         'request':request,
-        'type':type
+        'type':type,
+        'config':CONFIG,
     }
 
-    return render_to_response('autonumber/gaozi_add.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/tinggaozi_add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def ListTingGaoZi(request, type):
-    mList = Case.objects.all()
+    index = int(type) - 1
+    mList = Case.objects.filter(documenttype='2', documentunit=CONFIG['left_panel'][index]['index'])
 
     #分页功能
-    lst = SelfPaginator(request,mList, 20)
+    lst = SelfPaginator(request, mList, 20)
 
     kwvars = {
         'lPage':lst,
         'request':request,
+        'type':type,
+        'config':CONFIG,
     }
 
-    return render_to_response('autonumber/role_list.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/tinggaozi_list.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def EditTingGaoZi(request, type, ID):
-    iRole = RoleList.objects.get(id=ID)
+    iTingGaozi = Case.objects.get(id=ID)
 
     if request.method == "POST":
-        form = CaseForm(request.POST,instance=iRole)
+        form = CaseForm(request.POST,instance=iTingGaozi)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('listroleurl'))
+            return HttpResponseRedirect(reverse('ListTingGaoZi', args=(type,)))
     else:
-        form = CaseForm(instance=iRole)
+        form = CaseForm(instance=iTingGaozi)
 
     kwvars = {
         'ID':ID,
         'form':form,
         'request':request,
+        'type':type,
+        'config':CONFIG,
     }
 
-    return render_to_response('autonumber/role_edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/tinggaozi_edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def DeleteTingGaoZi(request, type, ID):
     Case.objects.filter(id = ID).delete()
 
-    return HttpResponseRedirect(reverse('listroleurl'))
+    return HttpResponseRedirect(reverse('ListTingGaoZi', args=(type,)))
+
+
+
+
 
 #---------------------------处字--------------------------
 
@@ -151,58 +178,69 @@ def AddChuZi(request, type):
     if request.method == "POST":
         form = CaseForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
+            osc = form.save(commit=False)
+            osc.creater = request.user
+            index = int(type) - 1
+            osc.documentunit = CONFIG['left_panel'][index]['index']
+            osc.documenttype = '3'
+            osc.save()
+            return HttpResponseRedirect(reverse('ListChuZi', args=(type,)))
     else:
         form = CaseForm()
-
+    
     kwvars = {
         'form':form,
         'request':request,
-        'type':type
+        'type':type,
+        'config':CONFIG,
     }
 
-    return render_to_response('autonumber/gaozi_add.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/chuzi_add.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def ListChuZi(request, type):
-    mList = Case.objects.all()
+    index = int(type) - 1
+    mList = Case.objects.filter(documenttype='3', documentunit=CONFIG['left_panel'][index]['index'])
 
     #分页功能
-    lst = SelfPaginator(request,mList, 20)
+    lst = SelfPaginator(request, mList, 20)
 
     kwvars = {
         'lPage':lst,
         'request':request,
+        'type':type,
+        'config':CONFIG,
     }
 
-    return render_to_response('autonumber/role_list.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/chuzi_list.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def EditChuZi(request, type, ID):
-    iRole = RoleList.objects.get(id=ID)
+    iChuzi = Case.objects.get(id=ID)
 
     if request.method == "POST":
-        form = CaseForm(request.POST,instance=iRole)
+        form = CaseForm(request.POST,instance=iChuzi)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('listroleurl'))
+            return HttpResponseRedirect(reverse('ListChuZi', args=(type,)))
     else:
-        form = CaseForm(instance=iRole)
+        form = CaseForm(instance=iChuzi)
 
     kwvars = {
         'ID':ID,
         'form':form,
         'request':request,
+        'type':type,
+        'config':CONFIG,
     }
 
-    return render_to_response('autonumber/role_edit.html',kwvars,RequestContext(request))
+    return render_to_response('autonumber/chuzi_edit.html',kwvars,RequestContext(request))
 
 @login_required
 @PermissionVerify()
 def DeleteChuZi(request, type, ID):
     Case.objects.filter(id = ID).delete()
 
-    return HttpResponseRedirect(reverse('listroleurl'))
+    return HttpResponseRedirect(reverse('ListChuZi', args=(type,)))

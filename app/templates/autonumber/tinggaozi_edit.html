@@ -1,41 +1,42 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Permission List
+    Edit TingGaoZi
 {% endblock %}
 
 {% block content %}
     <div class="btn-toolbar">
         <div class="btn-group">
-            {% url "addpermissionurl" as theaddpermissionurl %}
-            <a class="btn btn-default {%if request.path = theaddpermissionurl%} active {%endif%}" href={{ theaddpermissionurl }}><span class="glyphicon glyphicon-edit"></span>新建权限</a>
-            {% url "listpermissionurl" as thelistpermissionurl %}
-            <a class="btn btn-default {%if request.path = thelistpermissionurl%} active {%endif%}" href={{ thelistpermissionurl }}><span class="glyphicon glyphicon-list"></span>权限列表</a>
+            {% url "AddTingGaoZi" type as theaddtinggaoziurl %}
+            <a class="btn btn-default {%if request.path = theaddtinggaoziurl%} active {%endif%}" href={{ theaddtinggaoziurl }}><span class="glyphicon glyphicon-edit"></span>新建听告字</a>
+            {% url "ListTingGaoZi" type as thelisttinggaoziurl %}
+            <a class="btn btn-default {%if request.path = thelisttinggaoziurl%} active {%endif%}" href={{ thelisttinggaoziurl }}><span class="glyphicon glyphicon-list"></span>听告字列表</a>
         </div>
     </div>
 
     <hr/>
 
-    <table class="table table-hover table-striped  table-bordered table-condensed">
-        <tr>
-            <th>权限名称</th>
-            <th>URL</th>
-            <th>操作</th>
-        </tr>
+    <form class="form-horizontal" role="form" action={% url "EditTingGaoZi" type ID %} method="POST" >
+    {% csrf_token %}
 
-        {% for i in lPage %}
-            <tr style="font-size: 13px;">
-                <td>{{ i.name }}</td>
-                <td>{{ i.url }}</td>
-
-                <td>
-                    <a href={% url "editpermissionurl" i.id %} onclick="return confirm('确认编辑权限吗？？')"><span class="glyphicon glyphicon-edit btn-xs"></span></a>
-                    <a href={% url "deletepermissionurl" i.id %} onclick="return confirm('确认删除权限吗？？')"><span class="glyphicon glyphicon-trash btn-xs"></span></a>
-                </td>
-            </tr>
+        {% for item in form %}
+            <div class="form-group">
+                <label class="control-label col-md-1">{{item.label}}</label>
+                <div class="col-md-2">
+                    {{item}}
+                </div>
+                <div class="col-md-offset-1 col-md-10">
+                    {{item.errors}}
+                </div>
+            </div>
         {% endfor %}
 
-    </table>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确认更新吗？')">更 新</button>
+            <div>
+        </div>
 
-    {% include "common/paginator.html" %}
+    </form>
+
 {% endblock %}

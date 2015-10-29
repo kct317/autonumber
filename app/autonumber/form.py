@@ -554,19 +554,19 @@ class PermissionListForm(forms.ModelForm):
 class CaseForm(forms.ModelForm):
     class Meta:
         model = Case
-        fields = ('casename','caseproperty','casecreater','documentunit','documenttype',
+        fields = ('casename','caseproperty','casecreater',
                   'litigant','litiganttype','casevalue','fines','forfeituremoney',
                   'forfeitureitem','forfeitureamount','illegalfacts','law','punishbasis',
                   'createdate','informdate','informnumber','issueddate','decisionnumber',
                   'handlingunit','auditorman','remarkman')
+        #exclude = ('creater')
         widgets = {
             'casename' : forms.TextInput(attrs={'class':'form-control'}),
-            'caseproperty' : forms.Select(attrs={'class':'form-control'}),
+            'caseproperty' : forms.Select(choices=CONFIG['casetype'], attrs={'class':'form-control'}),
             'casecreater' : forms.TextInput(attrs={'class':'form-control'}),
-            'creater' : forms.Select(attrs={'class':'form-control'}),
 
-            'documentunit' : forms.TextInput(attrs={'class':'form-control'}),
-            'documenttype' : forms.TextInput(attrs={'class':'form-control'}),
+            #'documentunit' : forms.TextInput(attrs={'class':'form-control'}),
+            #'documenttype' : forms.TextInput(attrs={'class':'form-control'}),
 
             'litigant' : forms.TextInput(attrs={'class':'form-control'}),
             'litiganttype' : forms.TextInput(attrs={'class':'form-control'}),
@@ -602,11 +602,6 @@ class CaseForm(forms.ModelForm):
         self.fields['caseproperty'].error_messages={'required':u'请选择案件性质'}
         self.fields['casecreater'].label=u'案件录入员'
         self.fields['casecreater'].required=False
-
-        self.fields['documentunit'].label=u'文书所属单位'
-        self.fields['documentunit'].required=False
-        self.fields['documenttype'].label=u'文书类型'
-        self.fields['documenttype'].required=False
 
         self.fields['litigant'].label=u'当事人'
         self.fields['litigant'].required=False

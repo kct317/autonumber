@@ -104,7 +104,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', #数据库引擎
         'NAME': 'autonumber',                 #数据库名
         'USER': 'root',                       #用户名
-        'PASSWORD': 'comgointheworld!@#123',  #密码
+        'PASSWORD': 'donotuseroot!@#123',  #密码
         'HOST': '127.0.0.1',                  #数据库主机 默认为localhost
         'PORT': 3306,                         #数据库端口 MySQL默认为3306
     }
@@ -157,3 +157,8 @@ STATICFILES_DIRS = (
 
 SESSION_COOKIE_AGE=60*30   #设置服务器端会话的有效期
 SESSION_EXPIRE_AT_BROWSER_CLOSE=False  #会话cookie可以在用户浏览器中保持有效期。True：关闭浏览器，则Cookie失效。
+
+
+DEFAULT_CHARSET = 'utf-8'
+FILE_CHARSET = 'utf-8'
+

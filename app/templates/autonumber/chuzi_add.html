@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Add Permission
+    Add ChuZi
 {% endblock %}
 
 {% block content %}
     <div class="btn-toolbar">
         <div class="btn-group">
-            {% url "addpermissionurl" as theaddpermissionurl %}
-            <a class="btn btn-default {%if request.path = theaddpermissionurl%} active {%endif%}" href={{ theaddpermissionurl }}><span class="glyphicon glyphicon-edit"></span>新建权限</a>
-            {% url "listpermissionurl" as thelistpermissionurl %}
-            <a class="btn btn-default {%if request.path = thelistpermissionurl%} active {%endif%}" href={{ thelistpermissionurl }}><span class="glyphicon glyphicon-list"></span>权限列表</a>
+            {% url "AddChuZi" type as theaddchuziurl %}
+            <a class="btn btn-default {%if request.path = theaddchuziurl%} active {%endif%}" href={{ theaddchuziurl }}><span class="glyphicon glyphicon-edit"></span>新建处字</a>
+            {% url "ListChuZi" type as thelistchuziurl %}
+            <a class="btn btn-default {%if request.path = thelistchuziurl%} active {%endif%}" href={{ thelistchuziurl }}><span class="glyphicon glyphicon-list"></span>处字列表</a>
         </div>
     </div>
 
     <hr/>
 
-    <form class="form-horizontal" role="form" action={% url "addpermissionurl" %} method="POST" >
+    <form class="form-horizontal" role="form" action={% url "AddChuZi" type %} method="POST" >
     {% csrf_token %}
 
         {% for item in form %}

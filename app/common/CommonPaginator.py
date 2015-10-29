@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
-#update:2014-09-25 by liufeily@163.com
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 

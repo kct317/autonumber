@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Edit Permission
+    Edit GaoZi
 {% endblock %}
 
 {% block content %}
     <div class="btn-toolbar">
         <div class="btn-group">
-            {% url "addpermissionurl" as theaddpermissionurl %}
-            <a class="btn btn-default {%if request.path = theaddpermissionurl%} active {%endif%}" href={{ theaddpermissionurl }}><span class="glyphicon glyphicon-edit"></span>新建权限</a>
-            {% url "listpermissionurl" as thelistpermissionurl %}
-            <a class="btn btn-default {%if request.path = thelistpermissionurl%} active {%endif%}" href={{ thelistpermissionurl }}><span class="glyphicon glyphicon-list"></span>权限列表</a>
+            {% url "AddGaoZi" type as theaddgaoziurl %}
+            <a class="btn btn-default {%if request.path = theaddgaoziurl%} active {%endif%}" href={{ theaddgaoziurl }}><span class="glyphicon glyphicon-edit"></span>新建告字</a>
+            {% url "ListGaoZi" type as thelistgaoziurl %}
+            <a class="btn btn-default {%if request.path = thelistgaoziurl%} active {%endif%}" href={{ thelistgaoziurl }}><span class="glyphicon glyphicon-list"></span>告字列表</a>
         </div>
     </div>
 
     <hr/>
 
-    <form class="form-horizontal" role="form" action={% url "editpermissionurl" ID %} method="POST" >
+    <form class="form-horizontal" role="form" action={% url "EditGaoZi" type ID %} method="POST" >
     {% csrf_token %}
 
         {% for item in form %}

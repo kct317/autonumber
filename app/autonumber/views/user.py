@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
-#update:2014-09-12 by liufeily@163.com
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
@@ -59,6 +58,7 @@ def ChangePassword(request):
     kwvars = {
         'form':form,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/password_change.html',kwvars,RequestContext(request))
@@ -148,6 +148,7 @@ def ResetPassword(request,ID):
         'object':user,
         'newpassword':newpassword,
         'request':request,
+        'config':CONFIG,
     }
 
     return render_to_response('autonumber/password_reset.html',kwvars,RequestContext(request))

@@ -146,21 +146,21 @@ class User(AbstractBaseUser):
             return True
 
 
-
+'''
 class CaseProperty(models.Model):
     caseproname      = models.CharField(max_length=128, default='') #案件性质类型名称
     def __str__(self):
         return self.caseproname
+'''
 
 class Case(models.Model):
-    caseid           = models.AutoField(primary_key=True)
     casename         = models.CharField(max_length=128, default='') #案件名称
-    caseproperty     = models.ForeignKey(CaseProperty)              #案件性质/类型  下拉框
+    caseproperty     = models.CharField(max_length=128, default='') #案件性质/类型  下拉框
     casecreater      = models.CharField(max_length=128, default='') #立案人
-    creater          = models.ForeignKey(User)              #案件录入员
+    creater          = models.ForeignKey(User)                      #案件录入员
 
-    documentunit     = models.IntegerField(default=0) #文书所属单位
-    documenttype     = models.IntegerField(default=0) #文书类型
+    documentunit     = models.CharField(max_length=128, default='') #文书所属单位   例如：法规所   左侧栏的大标题
+    documenttype     = models.CharField(max_length=128, default='') #文书类型       例如：告字/听告字/处字  3种类型分别为：1,2,3
 
     litigant         = models.CharField(max_length=30, default='') #当事人
     litiganttype     = models.IntegerField(default=0)              #当事人类型
@@ -170,7 +170,7 @@ class Case(models.Model):
     forfeituremoney  = models.IntegerField(default=0) #没收金额
 
     forfeitureitem   = models.CharField(max_length=128, default='') #没收物品
-    forfeitureamount = models.IntegerField(default='')              #没收数量
+    forfeitureamount = models.IntegerField(default=0)               #没收数量
 
     illegalfacts     = models.TextField(default='') #违法事实
     law              = models.TextField(default='') #违反法律
@@ -182,7 +182,7 @@ class Case(models.Model):
     informnumber     = models.CharField(max_length=128, default='') #听证告知书/告知书编号  鹤工商告字 [2015] 00001号
     issueddate       = models.DateTimeField(default=datetime.now)   #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
     decisionnumber   = models.CharField(max_length=128, default='') #行政处罚决定书编号   鹤工商处字 [2015] 00001号
-    handlingunit     = models.CharField(max_length=128, default='') #办案单位
+    handlingunit     = models.CharField(max_length=128, default='') #办案单位/承办单位
     auditorman       = models.CharField(max_length=30, default='')  #核审人员（法制员）
 
     remarkman        = models.TextField(default='') #案件备注
