@@ -4,6 +4,23 @@
     Add GaoZi
 {% endblock %}
 
+{% load staticfiles  %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/widgets.css' %}">
+    <script type="text/javascript">window.__admin_media_prefix__ = "/static/";</script>
+    <script type="text/javascript">window.__admin_utc_offset__ = "0";</script>
+    <script src="{% static 'js/jsi18n.js' %}"></script>
+    <script src="{% static 'js/core.js' %}"></script>
+    <script src="{% static 'js/admin/RelatedObjectLookups.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery.init.js' %}"></script>
+    <script src="{% static 'js/actions.js' %}"></script>
+    <script src="{% static 'js/calendar.js' %}"></script>
+    <script src="{% static 'js/admin/DateTimeShortcuts.js' %}"></script>
+{% endblock %}
+
 {% block content %}
     <div class="btn-toolbar">
         <div class="btn-group">

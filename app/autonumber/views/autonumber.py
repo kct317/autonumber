@@ -9,9 +9,9 @@ from app.autonumber.views.permission import PermissionVerify
 from django.contrib.auth import get_user_model
 
 from app.autonumber.form import CaseForm
-from app.autonumber.models import Case
+from app.autonumber.models import Case,GlobalVar
 from app.autonumber.config import CONFIG
-
+import time
 #--------------------------告字---------------------------
 
 @login_required
@@ -24,8 +24,12 @@ def AddGaoZi(request, type):
             osc.creater = request.user
             index = int(type) - 1
             osc.documentunit = CONFIG['left_panel'][index]['index']
+            glvar = GlobalVar.objects.filter(id=1)[0]
+            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount))
             osc.documenttype = '1'
             osc.save()
+            glvar.casecount += 1
+            glvar.save()
             return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
     else:
         form = CaseForm()
@@ -103,8 +107,12 @@ def AddTingGaoZi(request, type):
             osc.creater = request.user
             index = int(type) - 1
             osc.documentunit = CONFIG['left_panel'][index]['index']
+            glvar = GlobalVar.objects.filter(id=1)[0]
+            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount))
             osc.documenttype = '2'
             osc.save()
+            glvar.casecount += 1
+            glvar.save()
             return HttpResponseRedirect(reverse('ListTingGaoZi', args=(type,)))
     else:
         form = CaseForm()
@@ -182,8 +190,12 @@ def AddChuZi(request, type):
             osc.creater = request.user
             index = int(type) - 1
             osc.documentunit = CONFIG['left_panel'][index]['index']
+            glvar = GlobalVar.objects.filter(id=1)[0]
+            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount))
             osc.documenttype = '3'
             osc.save()
+            glvar.casecount += 1
+            glvar.save()
             return HttpResponseRedirect(reverse('ListChuZi', args=(type,)))
     else:
         form = CaseForm()

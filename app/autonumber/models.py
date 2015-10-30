@@ -155,12 +155,12 @@ class CaseProperty(models.Model):
 
 class Case(models.Model):
     casename         = models.CharField(max_length=128, default='') #案件名称
-    caseproperty     = models.CharField(max_length=128, default='') #案件性质/类型  下拉框
+    caseproperty     = models.IntegerField(default=0)               #案件性质/类型  下拉框
     casecreater      = models.CharField(max_length=128, default='') #立案人
     creater          = models.ForeignKey(User)                      #案件录入员
 
-    documentunit     = models.CharField(max_length=128, default='') #文书所属单位   例如：法规所   左侧栏的大标题
-    documenttype     = models.CharField(max_length=128, default='') #文书类型       例如：告字/听告字/处字  3种类型分别为：1,2,3
+    documentunit     = models.IntegerField(default=0) #文书所属单位   例如：法规所   左侧栏的大标题
+    documenttype     = models.IntegerField(default=0) #文书类型       例如：告字/听告字/处字  3种类型分别为：1,2,3
 
     litigant         = models.CharField(max_length=30, default='') #当事人
     litiganttype     = models.IntegerField(default=0)              #当事人类型
@@ -176,11 +176,11 @@ class Case(models.Model):
     law              = models.TextField(default='') #违反法律
     punishbasis      = models.TextField(default='') #处罚依据
 
-    createdate       = models.DateTimeField(default=datetime.now) #立案日期
-    informdate       = models.DateTimeField(default=datetime.now) #告知日期
+    createdate       = models.DateTimeField() #立案日期   default=datetime.now
+    informdate       = models.DateTimeField() #告知日期
 
     informnumber     = models.CharField(max_length=128, default='') #听证告知书/告知书编号  鹤工商告字 [2015] 00001号
-    issueddate       = models.DateTimeField(default=datetime.now)   #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
+    issueddate       = models.DateTimeField()   #处罚决定书发文日期   *** 处罚决定书的发文日期要大于或等于上一个发文日期
     decisionnumber   = models.CharField(max_length=128, default='') #行政处罚决定书编号   鹤工商处字 [2015] 00001号
     handlingunit     = models.CharField(max_length=128, default='') #办案单位/承办单位
     auditorman       = models.CharField(max_length=30, default='')  #核审人员（法制员）
@@ -189,6 +189,10 @@ class Case(models.Model):
 
     def __str__(self):
         return self.casename
+
+
+class GlobalVar(models.Model):
+    casecount         = models.IntegerField(default=1) #案件数量
 
 
 '''

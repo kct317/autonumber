@@ -3,6 +3,8 @@ from django.conf import settings
 
 from pjsite.views import Home
 from app.autonumber.views import user
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 """
 配置方法
@@ -61,5 +63,6 @@ urlpatterns = [
 	url(r'^autonumber/', include('app.autonumber.urls')),
 
 	#static
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': settings.STATIC_ROOT,}),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': settings.STATIC_ROOT,'show_indexes': True}),
 ]
+#urlpatterns += staticfiles_urlpatterns()       http://segmentfault.com/q/1010000000147010

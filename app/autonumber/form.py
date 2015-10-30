@@ -6,6 +6,7 @@ from django.contrib import auth
 from django.contrib.auth import get_user_model
 from app.autonumber.models import User,RoleList,PermissionList,Case
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
+from django.contrib.admin import widgets
 from app.autonumber.config import CONFIG
 
 '''
@@ -569,7 +570,7 @@ class CaseForm(forms.ModelForm):
             #'documenttype' : forms.TextInput(attrs={'class':'form-control'}),
 
             'litigant' : forms.TextInput(attrs={'class':'form-control'}),
-            'litiganttype' : forms.TextInput(attrs={'class':'form-control'}),
+            'litiganttype' : forms.Select(choices=CONFIG['litiganttype'], attrs={'class':'form-control'}),
 
             'casevalue' : forms.TextInput(attrs={'class':'form-control'}),
             'fines' : forms.TextInput(attrs={'class':'form-control'}),
@@ -582,11 +583,11 @@ class CaseForm(forms.ModelForm):
             'law' : forms.TextInput(attrs={'class':'form-control'}),
             'punishbasis' : forms.TextInput(attrs={'class':'form-control'}),
 
-            'createdate' : forms.TextInput(attrs={'class':'form-control'}),
-            'informdate' : forms.TextInput(attrs={'class':'form-control'}),
+            'createdate' : forms.DateTimeInput(attrs={},  format=('%Y-%m-%d %H:%M')),
+            'informdate' : forms.DateTimeInput(attrs={},  format=('%Y-%m-%d %H:%M')),
 
             'informnumber' : forms.TextInput(attrs={'class':'form-control'}),
-            'issueddate' : forms.TextInput(attrs={'class':'form-control'}),
+            'issueddate' : forms.DateTimeInput(attrs={},  format=('%Y-%m-%d %H:%M')),
             'decisionnumber' : forms.TextInput(attrs={'class':'form-control'}),
             'handlingunit' : forms.TextInput(attrs={'class':'form-control'}),
             'auditorman' : forms.TextInput(attrs={'class':'form-control'}),
@@ -600,7 +601,7 @@ class CaseForm(forms.ModelForm):
         self.fields['casename'].error_messages={'required':u'请输入案件名称'}
         self.fields['caseproperty'].label=u'案件性质'
         self.fields['caseproperty'].error_messages={'required':u'请选择案件性质'}
-        self.fields['casecreater'].label=u'案件录入员'
+        self.fields['casecreater'].label=u'立案人'
         self.fields['casecreater'].required=False
 
         self.fields['litigant'].label=u'当事人'
@@ -628,14 +629,17 @@ class CaseForm(forms.ModelForm):
         self.fields['punishbasis'].required=False
 
         self.fields['createdate'].label=u'立案日期'
-        self.fields['createdate'].required=False
+        self.fields['createdate'].error_messages={'required':u'请选择立案日期'}
+        self.fields['createdate'].widget = widgets.AdminDateWidget()
         self.fields['informdate'].label=u'告知日期'
-        self.fields['informdate'].required=False
+        self.fields['informdate'].error_messages={'required':u'请选择告知日期'}
+        self.fields['informdate'].widget = widgets.AdminDateWidget()
 
-        self.fields['informnumber'].label=u'听证告知书'
+        self.fields['informnumber'].label=u'听证告知书/告知书编号'
         self.fields['informnumber'].required=False
         self.fields['issueddate'].label=u'处罚决定书发文日期'
-        self.fields['issueddate'].required=False
+        self.fields['issueddate'].error_messages={'required':u'请选择处罚决定书发文日期'}
+        self.fields['issueddate'].widget = widgets.AdminDateWidget()
         self.fields['decisionnumber'].label=u'行政处罚决定书编号'
         self.fields['decisionnumber'].required=False
         
