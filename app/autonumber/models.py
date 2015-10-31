@@ -192,8 +192,9 @@ class Case(models.Model):
 
 
 class GlobalVar(models.Model):
-    casecount         = models.IntegerField(default=1) #案件数量
-
+    casecount1         = models.IntegerField(default=1) #告字编号流水号
+    casecount2         = models.IntegerField(default=1) #听告字编号流水号
+    casecount3         = models.IntegerField(default=1) #处字编号流水号
 
 '''
 class Manager(models.Model):

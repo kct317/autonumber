@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
 	'app.autonumber',  #app
-    'app.templatetags',    #模板tags
+    'app.autonumber.templatetags',    #模板tags
 
     'bootstrap_toolkit',
 ]
@@ -158,7 +158,18 @@ STATICFILES_DIRS = (
 SESSION_COOKIE_AGE=60*30   #设置服务器端会话的有效期
 SESSION_EXPIRE_AT_BROWSER_CLOSE=False  #会话cookie可以在用户浏览器中保持有效期。True：关闭浏览器，则Cookie失效。
 
-
+#编码
 DEFAULT_CHARSET = 'utf-8'
 FILE_CHARSET = 'utf-8'
+
+#邮件配置
+EMAIL_HOST = 'smtp.163.com'                   #SMTP地址
+EMAIL_PORT = 25                                 #SMTP端口
+EMAIL_HOST_USER = 'kctautonumber@163.com'       #我自己的邮箱
+EMAIL_HOST_PASSWORD = 'interesting'                  #我的邮箱密码
+EMAIL_SUBJECT_PREFIX = u'[自动取号系统]'            #为邮件Subject-line前缀,默认是'[django]'
+EMAIL_USE_TLS = True                             #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
+#管理员站点
+SERVER_EMAIL = 'kctautonumber@163.com'            #The email address that error messages come from, such as those sent to ADMINS and MANAGERS.
+
 

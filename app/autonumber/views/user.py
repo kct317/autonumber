@@ -13,6 +13,8 @@ from django.contrib.auth import get_user_model
 from app.autonumber.form import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm
 from app.autonumber.config import CONFIG
 
+from django.core.mail import EmailMultiAlternatives
+
 def LoginUser(request):
     '''用户登录view'''
     if request.user.is_authenticated():
@@ -39,6 +41,40 @@ def LoginUser(request):
     }
 
     return render_to_response('autonumber/login.html',kwvars,RequestContext(request))
+
+def setEmail(request):
+    if request.method == "POST":
+        #        参考：https://django-chinese-docs-14.readthedocs.org/en/latest/topics/email.html
+        #        方式一：
+        #        send_mail('subject', 'this is the message of email', 'pythonsuper@gmail.com', ['1565208411@qq.com','1373763906@qq.com'], fail_silently=True)
+        #        方式二：
+        #         message1 = ('subject1','this is the message of email1','pythonsuper@gmail.com',['1565208411@qq.com','xinxinyu2011@163.com'])
+        #         message2 = ('subject2','this is the message of email2','pythonsuper@gmail.com',['1373763906@qq.com','xinxinyu2011@163.com'])
+        #         send_mass_mail((message1,message2), fail_silently=False)
+        #        方式三：防止邮件头注入
+        #         try:
+        #             send_mail(subject, message, from_email, recipient_list, fail_silently, auth_user, auth_password, connection)
+        #         except BadHeaderError:
+        #             return HttpResponse('Invaild header fount.')
+
+        #        方式四：EmailMessage()
+        #           首先实例化一个EmailMessage()对象
+        #         em = EmailMessage('subject','body','from@example.com',['1565208411@qq.com'],['xinxinyu2011@163.com'],header={'Reply-to':'another@example.com'})
+        #           调用相应的方法
+
+        #         方式五：发送多用途邮件
+        subject,form_email,to = 'hello','from@example.com','413817085@qq.com'
+        text_content = 'This is an important message'
+        html_content = u'<b>激活链接：</b><a href="http://www.baidu.com">http:www.baidu.com</a>'
+        msg = EmailMultiAlternatives(subject,text_content,form_email,[to])
+        msg.attach_alternative(html_content, 'text/html')
+        msg.send()
+        
+#       发送邮件成功了给管理员发送一个反馈
+#       mail_admins(u'用户注册反馈', u'当前XX用户注册了该网站', fail_silently=True)
+        return HttpResponse(u'发送邮件成功')
+    return render_to_response('common/test.html')
+
 
 @login_required
 def LogoutUser(request):

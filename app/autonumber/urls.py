@@ -32,16 +32,19 @@ urlpatterns = patterns('app.autonumber.views',
     url(r'^(?P<type>\d+)/gaozi/list/$', 'autonumber.ListGaoZi', name='ListGaoZi'),
     url(r'^(?P<type>\d+)/gaozi/edit/(?P<ID>\d+)/$', 'autonumber.EditGaoZi', name='EditGaoZi'),
     url(r'^(?P<type>\d+)/gaozi/delete/(?P<ID>\d+)/$', 'autonumber.DeleteGaoZi', name='DeleteGaoZi'),
+    url(r'^(?P<type>\d+)/gaozi/searchlist/$', 'autonumber.SearchListGaoZi', name='SearchListGaoZi'),
     #--------------------------------------------------------------------------------
     url(r'^(?P<type>\d+)/tinggaozi/add/$', 'autonumber.AddTingGaoZi', name='AddTingGaoZi'),
     url(r'^(?P<type>\d+)/tinggaozi/list/$', 'autonumber.ListTingGaoZi', name='ListTingGaoZi'),
     url(r'^(?P<type>\d+)/tinggaozi/edit/(?P<ID>\d+)/$', 'autonumber.EditTingGaoZi', name='EditTingGaoZi'),
     url(r'^(?P<type>\d+)/tinggaozi/delete/(?P<ID>\d+)/$', 'autonumber.DeleteTingGaoZi', name='DeleteTingGaoZi'),
+    url(r'^(?P<type>\d+)/tinggaozi/searchlist/$', 'autonumber.SearchListTingGaoZi', name='SearchListTingGaoZi'),
     #--------------------------------------------------------------------------------
     url(r'^(?P<type>\d+)/chuzi/add/$', 'autonumber.AddChuZi', name='AddChuZi'),
     url(r'^(?P<type>\d+)/chuzi/list/$', 'autonumber.ListChuZi', name='ListChuZi'),
     url(r'^(?P<type>\d+)/chuzi/edit/(?P<ID>\d+)/$', 'autonumber.EditChuZi', name='EditChuZi'),
     url(r'^(?P<type>\d+)/chuzi/delete/(?P<ID>\d+)/$', 'autonumber.DeleteChuZi', name='DeleteChuZi'),
+    url(r'^(?P<type>\d+)/chuzi/searchlist/$', 'autonumber.SearchListChuZi', name='SearchListChuZi'),
 
 )
 

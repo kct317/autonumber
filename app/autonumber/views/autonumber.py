@@ -25,10 +25,10 @@ def AddGaoZi(request, type):
             index = int(type) - 1
             osc.documentunit = CONFIG['left_panel'][index]['index']
             glvar = GlobalVar.objects.filter(id=1)[0]
-            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount))
+            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount1))
             osc.documenttype = '1'
             osc.save()
-            glvar.casecount += 1
+            glvar.casecount1 += 1
             glvar.save()
             return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
     else:
@@ -91,8 +91,23 @@ def DeleteGaoZi(request, type, ID):
 
     return HttpResponseRedirect(reverse('ListGaoZi', args=(type,)))
 
+@login_required
+@PermissionVerify()
+def SearchListGaoZi(request, type):
+    index = int(type) - 1
+    mList = Case.objects.filter(documenttype='1', documentunit=CONFIG['left_panel'][index]['index'], casename__contains=request.POST['query'])
 
+    #分页功能
+    lst = SelfPaginator(request, mList, 20)
 
+    kwvars = {
+        'lPage':lst,
+        'request':request,
+        'type':type,
+        'config':CONFIG,
+    }
+
+    return render_to_response('autonumber/gaozi_list.html',kwvars,RequestContext(request))
 
 
 #---------------------------听告字-------------------------
@@ -108,10 +123,10 @@ def AddTingGaoZi(request, type):
             index = int(type) - 1
             osc.documentunit = CONFIG['left_panel'][index]['index']
             glvar = GlobalVar.objects.filter(id=1)[0]
-            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount))
+            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount2))
             osc.documenttype = '2'
             osc.save()
-            glvar.casecount += 1
+            glvar.casecount2 += 1
             glvar.save()
             return HttpResponseRedirect(reverse('ListTingGaoZi', args=(type,)))
     else:
@@ -174,7 +189,23 @@ def DeleteTingGaoZi(request, type, ID):
 
     return HttpResponseRedirect(reverse('ListTingGaoZi', args=(type,)))
 
+@login_required
+@PermissionVerify()
+def SearchListTingGaoZi(request, type):
+    index = int(type) - 1
+    mList = Case.objects.filter(documenttype='2', documentunit=CONFIG['left_panel'][index]['index'], casename__contains=request.POST['query'])
 
+    #分页功能
+    lst = SelfPaginator(request, mList, 20)
+
+    kwvars = {
+        'lPage':lst,
+        'request':request,
+        'type':type,
+        'config':CONFIG,
+    }
+
+    return render_to_response('autonumber/tinggaozi_list.html',kwvars,RequestContext(request))
 
 
 
@@ -191,10 +222,10 @@ def AddChuZi(request, type):
             index = int(type) - 1
             osc.documentunit = CONFIG['left_panel'][index]['index']
             glvar = GlobalVar.objects.filter(id=1)[0]
-            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount))
+            osc.informnumber = (CONFIG['documentnum'][type] % (time.strftime('%Y'), glvar.casecount3))
             osc.documenttype = '3'
             osc.save()
-            glvar.casecount += 1
+            glvar.casecount3 += 1
             glvar.save()
             return HttpResponseRedirect(reverse('ListChuZi', args=(type,)))
     else:
@@ -256,3 +287,21 @@ def DeleteChuZi(request, type, ID):
     Case.objects.filter(id = ID).delete()
 
     return HttpResponseRedirect(reverse('ListChuZi', args=(type,)))
+
+@login_required
+@PermissionVerify()
+def SearchListChuZi(request, type):
+    index = int(type) - 1
+    mList = Case.objects.filter(documenttype='3', documentunit=CONFIG['left_panel'][index]['index'], casename__contains=request.POST['query'])
+
+    #分页功能
+    lst = SelfPaginator(request, mList, 20)
+
+    kwvars = {
+        'lPage':lst,
+        'request':request,
+        'type':type,
+        'config':CONFIG,
+    }
+
+    return render_to_response('autonumber/chuzi_list.html',kwvars,RequestContext(request))

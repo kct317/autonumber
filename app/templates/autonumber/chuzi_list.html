@@ -4,6 +4,8 @@
     List ChuZi
 {% endblock %}
 
+
+{% load extra_tags %}
 {% block content %}
     <div class="btn-toolbar">
         <div class="btn-group">
@@ -16,15 +18,27 @@
 
     <hr/>
 
+    <div id="toolbar">
+        <form id="changelist-search" role="form" action={% url "SearchListChuZi" type %} method="POST">
+            {% csrf_token %}
+            <div><!-- DIV needed for valid HTML -->
+            <label for="searchbar"><img src="/static/admin/img/icon_searchbox.png" alt="Search" /></label>
+            <input type="text" size="40" name="query" value="" id="searchbar" />
+            <input type="submit" value="Search" />
+            </div>
+        </form>
+    </div>
+
     <table class="table table-hover table-striped  table-bordered table-condensed">
         <tr>
             <th>id</th>
             <th>文书号</th>
 
+            <th>案件名称</th>
             <th>承办单位</th>
             <th>当事人</th>
 
-            <th>ceshi</th>
+            <th>文书所属单位</th>
             <th>决定书</th>
             <th>操作</th>
         </tr>
@@ -34,10 +48,15 @@
                 <td>{{ i.id }}</td>
                 <td>{{ i.informnumber }}</td>
 
+                <td>{{ i.casename }}</td>
                 <td>{{ i.handlingunit }}</td>
                 <td>{{ i.litigant }}</td>
 
-                <td>{{ i.documentunit }}</td>
+                {% with index=i.documentunit|add:'-1' %}
+                    {% with item=config.left_panel|key:index %}
+                    <td>{{item.name}}</td>
+                    {% endwith %}
+                {% endwith %}
                 <td>{{ i.decisionnumber }}</td>
                 <td class="host_buttom">
                     <a class="btn btn-warning btn-xs"  href={% url "EditChuZi" type i.id %} onclick="return confirm('是否确认编辑？')">编辑</a>
