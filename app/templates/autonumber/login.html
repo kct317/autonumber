@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+    {% ifequal '1' reg %}
+        <h1>register success !</h1>
+    {% endifequal %}
     <form class="form-horizontal" role="form" action={% url "loginurl" %} method="POST" >
     {% csrf_token %}
 

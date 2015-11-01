@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('app.autonumber.views',
     url(r'^login/$', 'user.LoginUser', name='loginurl'),
     url(r'^logout/$', 'user.LogoutUser', name='logouturl'),
+    url(r'^register/$', 'user.Register', name='registerurl'),
 
     url(r'^user/changepwd/$', 'user.ChangePassword', name='changepasswordurl'),
     url(r'^user/resetpwd/(?P<ID>\d+)/$', 'user.ResetPassword', name='resetpasswordurl'),

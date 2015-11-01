@@ -1,49 +1,30 @@
-<!DOCTYPE html>
-{% load bootstrap_toolkit %}
-{% load url from future %}
-{% load staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>办案取号系统</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-    {% bootstrap_stylesheet_tag %}
-    {% bootstrap_stylesheet_tag "responsive" %}
-    <style type="text/css">
-        body {
-            padding-top: 60px;
-        }
-    </style>
-    <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
-    {% bootstrap_javascript_tag %}
-    {% block extra_head %}{% endblock %}
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block title %}
+    Register
+{% endblock %}
 
-    <h2>修改密码</h2>
-    
-    {% if oldpassword_is_wrong %}
-        <div class="alert alert-error">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <h4>错误!</h4>原密码不正确
+{% block content %}
+    <form class="form-horizontal" role="form" action={% url "registerurl" %} method="POST" >
+    {% csrf_token %}
+
+        {% for item in form %}
+            <div class="form-group">
+                <label class="control-label col-md-1">{{item.label}}</label>
+                <div class="col-md-2">
+                    {{item}}
+                </div>
+                <div class="col-md-offset-1 col-md-10">
+                    {{item.errors}} {{error_msg}}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <button type="submit" class="btn btn-success btn-sm" >注 册</button>
+            <div>
         </div>
-    {% endif %}
-    <div class="well">
-        <form class="form-horizontal" action="" method="post">
-            {% csrf_token %}
-            {{ form|as_bootstrap:"horizontal" }}
-            <p class="form-actions">
-                <input type="submit" value="确认修改" class="btn btn-primary">
-            </p>
-        </form>
-    </div>
-	
-	<!-- 下面加载，页面显示更快 -->
-	<script src="{% static 'js/jquery-1.9.0.min.js' %}"></script>
-</body>
-</html>
+
+    </form>
+{% endblock %}

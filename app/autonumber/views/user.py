@@ -10,7 +10,7 @@ from app.autonumber.views.permission import PermissionVerify
 
 from django.contrib import auth
 from django.contrib.auth import get_user_model
-from app.autonumber.form import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm
+from app.autonumber.form import LoginUserForm,ChangePasswordForm,AddUserForm,EditUserForm,RegisterForm
 from app.autonumber.config import CONFIG
 
 from django.core.mail import EmailMultiAlternatives
@@ -26,6 +26,11 @@ def LoginUser(request):
     else:
         next = '/'
 
+    if request.method == 'GET' and 'reg' in request.GET:
+        reg = request.GET['reg']
+    else:
+        reg = '0'
+
     if request.method == "POST":
         form = LoginUserForm(request, data=request.POST)
         if form.is_valid():
@@ -38,6 +43,7 @@ def LoginUser(request):
         'request':request,
         'form':form,
         'next':next,
+        'reg':reg,
     }
 
     return render_to_response('autonumber/login.html',kwvars,RequestContext(request))
@@ -69,12 +75,26 @@ def setEmail(request):
         msg = EmailMultiAlternatives(subject,text_content,form_email,[to])
         msg.attach_alternative(html_content, 'text/html')
         msg.send()
-        
-#       发送邮件成功了给管理员发送一个反馈
-#       mail_admins(u'用户注册反馈', u'当前XX用户注册了该网站', fail_silently=True)
+        #       发送邮件成功了给管理员发送一个反馈
+        #       mail_admins(u'用户注册反馈', u'当前XX用户注册了该网站', fail_silently=True)
         return HttpResponse(u'发送邮件成功')
     return render_to_response('common/test.html')
 
+def Register(request):
+    if request.method == 'GET':  
+        form = RegisterForm()  
+        return render_to_response('autonumber/register.html', RequestContext(request, {'form': form,}))  
+    else:  
+        form = RegisterForm(request.POST)
+        if form.is_valid():  
+            username=form.cleaned_data["username"]
+            email=form.cleaned_data["email"]
+            password=form.cleaned_data["password1"]
+            user=get_user_model().objects.create_user(email,username,password)
+            user.save()#写入数据库
+            return HttpResponseRedirect('/autonumber/login?reg=1')
+        else:  
+            return render_to_response('autonumber/register.html', RequestContext(request, {'form': form,}))
 
 @login_required
 def LogoutUser(request):
