@@ -44,6 +44,7 @@ def LoginUser(request):
         'form':form,
         'next':next,
         'reg':reg,
+        'config':CONFIG
     }
 
     return render_to_response('autonumber/login.html',kwvars,RequestContext(request))
@@ -82,8 +83,13 @@ def setEmail(request):
 
 def Register(request):
     if request.method == 'GET':  
-        form = RegisterForm()  
-        return render_to_response('autonumber/register.html', RequestContext(request, {'form': form,}))  
+        form = RegisterForm()
+        kwvars = {
+            'request':request,
+            'form':form,
+            'config':CONFIG
+        }
+        return render_to_response('autonumber/register.html', kwvars, RequestContext(request))  
     else:  
         form = RegisterForm(request.POST)
         if form.is_valid():  
