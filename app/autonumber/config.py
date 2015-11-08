@@ -45,9 +45,9 @@ CONFIG = {
             'flag':[1,1,1],     #1为开启  0为关闭    对应着文书类型documenttype
         },
         {
-            'name':'XX所',
+            'name':'法规所',    #文书所属单位 
             'index':'2',
-            'flag':[1,1,1],
+            'flag':[1,1,1],     #1为开启  0为关闭    对应着文书类型documenttype
         },
     ],
 }
